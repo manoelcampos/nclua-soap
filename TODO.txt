@@ -1,0 +1,3 @@
+- Implementar aplicação lua standalone (wsdlparser.lua) para ler um WSDL a partir de uma URL,
+  ou de um arquivo WSDL salvo em disco, e gerar um script lua
+  contendo funções proxie para os métodos disponibilizados pelo serviço.

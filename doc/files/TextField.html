@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+<h1>Modules</h1>
+<ul>
+
+	<li>
+		<a href="../modules/base64.html">base64</a>
+	</li>
+
+	<li>
+		<a href="../modules/http.html">http</a>
+	</li>
+
+	<li>
+		<a href="../modules/ncluasoap.html">ncluasoap</a>
+	</li>
+
+	<li>
+		<a href="../modules/tcp.html">tcp</a>
+	</li>
+
+	<li>
+		<a href="../modules/util.html">util</a>
+	</li>
+
+</ul>
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li><strong>TextField.lua</strong></li>
+	
+	<li>
+		<a href="../files/base64.html">base64.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/http.html">http.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ncluasoap.html">ncluasoap.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/tcp.html">tcp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/util.html">util.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>TextField.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#TextField:getChar">TextField:getChar</a>&nbsp;(key)</td>
+	<td class="summary">Retorna o caractere relativo a posição atual (self.idx) da tecla numérica pressionada </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#TextField:keyPressTimeout">TextField:keyPressTimeout</a>&nbsp;(key)</td>
+	<td class="summary">Quando chamada, indica que o tempo de timout entre o pressionamento de uma tecla encerrou, assim, a tecla deve ser adicionada ao texto já digitado.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#TextField:paint">TextField:paint</a>&nbsp;(tmpText)</td>
+	<td class="summary">Desenha o texto na inteface gráfica </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#TextField:processKey">TextField:processKey</a>&nbsp;(evt)</td>
+	<td class="summary">Implementa o tratamento do pressionamento das teclas numéricas do controle remoto.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#TextField:registerTimeout">TextField:registerTimeout</a>&nbsp;(key)</td>
+	<td class="summary">Registra a função de timeout para executar depois de self.TIMEOUT milisegundos, para identificar quando houver timeout entre o pressionamento de uma tecla e outra, e somente então, adicionar a tecla ao texto já digitado </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#TextField:unregisterTimeout">TextField:unregisterTimeout</a>&nbsp;()</td>
+	<td class="summary">Desregistra a função de timeout.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="TextField:getChar"></a><strong>TextField:getChar</strong>&nbsp;(key)</dt>
+<dd>
+Retorna o caractere relativo a posição atual (self.idx) da tecla numérica pressionada
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  key: A tecla pressionada
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+O caractere associado a posição self.idx da tecla pressionada
+
+
+
+</dd>
+
+
+
+
+<dt><a name="TextField:keyPressTimeout"></a><strong>TextField:keyPressTimeout</strong>&nbsp;(key)</dt>
+<dd>
+Quando chamada, indica que o tempo de timout entre o pressionamento de uma tecla encerrou, assim, a tecla deve ser adicionada ao texto já digitado.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  key: Tecla numérica pressionada
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="TextField:paint"></a><strong>TextField:paint</strong>&nbsp;(tmpText)</dt>
+<dd>
+Desenha o texto na inteface gráfica
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  tmpText: Texto a ser impresso. Se for omitido, o valor do atributo text é impresso
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="TextField:processKey"></a><strong>TextField:processKey</strong>&nbsp;(evt)</dt>
+<dd>
+Implementa o tratamento do pressionamento das teclas numéricas do controle remoto. Este método deve ser chamado dentro de uma função tratadora de eventos.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  evt: Objeto da classe event recebido
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="TextField:registerTimeout"></a><strong>TextField:registerTimeout</strong>&nbsp;(key)</dt>
+<dd>
+Registra a função de timeout para executar depois de self.TIMEOUT milisegundos, para identificar quando houver timeout entre o pressionamento de uma tecla e outra, e somente então, adicionar a tecla ao texto já digitado
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  key: Tecla numérica pressionada
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="TextField:unregisterTimeout"></a><strong>TextField:unregisterTimeout</strong>&nbsp;()</dt>
+<dd>
+Desregistra a função de timeout. Este método deve ser chamado sempre que o usuário pressionar uma tecla antes do tempo de timeout definido em self.TIMEOUT. Com isto, a tecla pressionada anteriormente é descartada.
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

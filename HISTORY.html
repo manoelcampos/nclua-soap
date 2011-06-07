@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>NCLua SOAP History</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="generator" content="Geany 0.18" />
+</head>
+
+<body>
+<div align="center">
+  <h1>Histórico de melhorias incluídas no NCLua SOAP</h1>
+  <h2>Módulo para acesso a Web Services a partir de aplicações NCL/Lua para TV Digital</h2>
+  <h2>Desenvolvido por <a href="http://manoelcampos.com/contato" target="_blank">Manoel Campos da Silva Filho</a></h2>
+  <h3><a href="http://ncluasoap.manoelcampos.com" target="_blank">http://ncluasoap.manoelcampos.com</a></h3>
+</div>
+
+<h2>NCLua SOAP 0.5.6.x beta: <a href="" target="_blank">detalhes da versão</a></h2>
+
+<ul>
+  <li>Tratamento de falhas (fault) retornadas pelo Web Service. Assim, o parâmetro result
+  da função de callback (que é chamada quando a resposta do WS é obtida)
+  terá um campo faultcode e faultstring no lugar do retorno esperado.
+  </li>
+  <li>Inclusão de parâmetro soapHeader no método call para permitir passar um cabeçalho na requisição SOAP</li>
+</ul>
+
+
+<h2>NCLua SOAP 0.5.6.6 beta: <a href="http://manoelcampos.com/2010/09/24/liberado-ncluasoap-0-5-6-6/" target="_blank">detalhes da versão</a></h2>
+
+<ul>
+<li>
+Incluído recurso que permite informar o número da porta do serviço web que deseja-se acessar (caso seja uma porta diferente da 80), diretamente na URL do serviço. O parâmetro port do método call do módulo ncluasoap ainda existe, para que os programas antigos que o usam não precisem ser alterados, mas vou avaliar a possibilidade de excluir definitivamente tal parâmetro. Assim, recomendo que passem a utilizar o número da porta diretamente na URL do serviço.
+</li>
+</ul>
+
+
+<h2>NCLua SOAP 0.5.6.5 beta: <a href="http://manoelcampos.com/2010/08/28/liberado-ncluasoap-0-5-6-5/" target="_blank">detalhes da versão</a></h2>
+
+<ul>
+<li>Incluído suporte ao consumo de Web Services que requerem 
+<a href="http://en.wikipedia.org/wiki/Basic_authentication" target="_blank">autenticação HTTP (Basic Authentication)</a>, solicitando um 
+usuário e senha para acessar o serviço. Tal recurso já estava implementado no módulo HTTP
+e foi apenas utilizado pelo NCLua SOAP. O exemplo9httpauth foi incluído, que acessa
+o Web Service disponível em 
+<a href="http://manoelcampos.com/apps/httpauth/server.php" target="_blank">http://manoelcampos.com/apps/httpauth/server.php</a>.
+<p/>
+Para acessar tal Web Service (como pode ser visto fazendo o acesso via Web Browser)
+será solicitado um usuário e senha. Utilize o usuário <b>visitante</b> e a senha <b>visitante</b>.<p/>
+
+Para realizar a autenticação HTTP foram incluídos os parâmetros (opcionais) httpUser e httpPasswd no método call do módulo ncluasoap.
+Para mais detalhes, veja a documentação no diretório doc.
+
+</li>
+</ul>
+
+	
+<h2>NCLua SOAP 0.5.6.4 beta: <a href="http://manoelcampos.com/2010/07/31/liberado-ncluasoap-0-5-6-4/" target="_blank">detalhes da versão</a></h2>
+
+<ul>
+<li>Incluído suporte a métodos de Web Service que recebem parâmetros dos tipos array e struct/record.<br/>
+Para consumir tais métodos remotos, dentro da sub-tabela params, da tabela msgTable que
+deve ser passada como parâmetro para o método ncluasoap.call, deve-se incluir 
+uma tabela lua com índices numéricos (quando o parâmetro do método remoto for um array) 
+e uma tabela lua com índices nomeados (quando o parâmetro do método remoto for um struct/record).<p/>
+Colaboração de Samuel da Costa Alves Basilio
+</li>
+<li>Incluído exemplo para acesso a método de WS que recebe um struct como parâmetro.</li>
+</ul>
+
+
+<h2>NCLua SOAP 0.5.6.3 beta: 
+<a href="http://manoelcampos.com/2010/07/22/liberado-ncluasoap-0-5-6-3-melhor-suporte-a-wss-java/" target="_blank">detalhes da versão</a></h2>
+
+<ul>
+<li>
+Incluído suporte a Web Services que usam um arquivo XSD externo para as definições de tipos, 
+como os WS Java, construídos com a biblioteca JAX-WS.<br/>
+Veja documentação do parâmetro externalXsd da função call para mais detalhes. <p/>
+Colaboração de  Marco Aurelio Freesz Junior
+</li>
+</ul>
+
+<h2>NCLua SOAP 0.5.6.2 beta</h2>
+<ul>
+<li>Corrigido bug de obtenção de resultado de WS contendo um namespace prefix 
+igual a soapenv (e não soap, soap12 ou SOAP-ENV),
+retornado por Web Services Java Axis2.<p/>
+Colaboração de Gabriel Massote Prado.
+</li>
+</ul>
+
+<h2>NCLua SOAP 0.5.6.1 beta: 
+<a href="http://manoelcampos.com/2010/06/10/liberado-ncluasoap-0-5-6-ws-tvd-ginga/" target="_blank">detalhes da versão</a></h2>
+
+<ul>
+<li>
+Criado script para fazer parser de um WSDL e obter algumas das informações
+necessárias para fazer uma chamada a um Web Service com NCLua SOAP.<p/>
+
+O uso do script é opcional. Para sua execução, deve ser usado um PC com Lua 5.x ou superior de uma das seguintes formas:<br/>
+<pre>
+  lua wsdlparser.lua
+  lua wsdlparser.lua url_do_wsdl
+</pre><p/>	
+
+Veja a documentação (diretório doc) para mais detalhes.
+</li>
+
+<li>
+Esta versão deixou muito mais fácil o acesso ao valor retornado 
+pelo método remoto. O método getResponse, amplamente utilizado
+nos exemplos, teve o parâmetro xmlTable renomeado para result,
+para indicar que representa o retorno da função remota, que pode
+ou não ser uma tabela lua. Se o método remoto retornar uma variável
+primitiva simples (ou seja, com apenas um valor), result
+já será este valor, bastando imprimí-lo.
+</li>
+
+<li>
+Todos os exemplos foram atualizados e melhor documentados.
+Como quase todos eles apenas mostram o resultado no console, agora
+a aplicação é automaticamente finalizada (não precisando pressionar F11 na interface do VM Ware
+Player para fechar), facilitando a execução dos mesmos.
+</li>
+</ul>
+
+
+<h2>NCLua SOAP 0.5.5 beta: 
+<a href="http://manoelcampos.com/2010/07/31/acessando-webservices-php-com-ncluasoap/" target="_blank">detalhes da versão</a></h2>
+
+<ul>
+<li>
+Os parâmetros de entrada do WS agora podem ser gerados, no XML, 
+na mesma ordem em que foram definidos na tabela lua contendo os dados da requisição. 
+Para isto, basta colocar cada parâmetro dentro de uma sub-tabela sem nome. Por exemplo:<p/>
+<pre>
+  params = {
+    {ordem = "estado"}, 
+    {regiao = "sudeste"} 
+  }
+</pre>
+<p/>  
+
+Note que o parâmetro <strong>ordem</strong> está dentro de uma tabela sem nome, assim como <strong>regiao</strong>. <br/>
+Isto é necessário apenas para chamadas a Web Services PHP feitos com a biblioteca nuSOAP, que ignora
+o nome dos parâmetros e considera apenas a ordem em que foram passados.<p/>
+
+
+Outra abordagem para acesso a um WS PHP feito com nuSOAP é definir os 
+próprios parâmetros anonimamente, como abaixo. 
+Somente a ordem é que importa, os nomes dos parâmetros não.<p/>
+
+<pre>  params = {"estado", "sudeste"}</pre><p/>
+
+Esta forma é mais simples e a ordem dos parâmetros é obedecida ao 
+gerar o XML, no entanto, perde-se a identificação do nome dos parâmetros, 
+tornando menos legível o código fonte.<p/>
+
+Para mais detalhes, veja o exemplo 6.
+</li>
+</ul>
+
+<h2>NCLua SOAP 0.5.4 beta</h2>
+
+<ul>
+<li>
+Atualizado o módulo http, cujas funções para realização de requisições 
+agora contam com um parâmetro port (opcional e default 80).</li>
+
+<li>
+Atualizado método call do NCLua-SOAP incluindo o parâmetro port 
+(também opcional e default 80), para permitir acesso a WebServices que 
+estejam acessíveis em portas diferente da padrão. 
+Apesar de não ser algo comum, existe esta possibilidade de uso de uma porta diferenciada.
+</li>
+
+<li>
+Retirada a adição automática de / no final do namespace do WS, 
+pois alguns WSs davam erro, caso no WSDL não existisse uma barra final. 
+Assim, o namespace deve ser exatamente como no WSDL (com ou sem / no final).
+</li>
+
+<li>
+Incluído exemplo para consumo de WS de conversão de graus Fahrenheit para graus Celcius.
+</li>
+</ul>
+
+<h2>NCLua SOAP 0.5.3 beta</h2>
+
+<ul>
+<li>
+Incluído exemplo para consumir WebService de rastreamento 
+de encomendas nos Correios. Vídeo demonstrativo abaixo.
+</li>
+</ul>
+
+<h2>NCLua SOAP 0.5.2 beta</h2>
+<ul>
+<li>
+Adicionados novos exemplos.
+Corrigido problema que ocorria quando o método remoto não possui nenhum parâmetro de entrada.
+</li>
+</ul>
+
+</body>
+</html>

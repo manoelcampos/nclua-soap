@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+<h1>Modules</h1>
+<ul>
+
+	<li>
+		<a href="../modules/base64.html">base64</a>
+	</li>
+
+	<li>
+		<a href="../modules/http.html">http</a>
+	</li>
+
+	<li>
+		<a href="../modules/ncluasoap.html">ncluasoap</a>
+	</li>
+
+	<li>
+		<a href="../modules/tcp.html">tcp</a>
+	</li>
+
+	<li>
+		<a href="../modules/util.html">util</a>
+	</li>
+
+</ul>
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/base64.html">base64.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/http.html">http.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ncluasoap.html">ncluasoap.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/soaptest1.html">soaptest1.lua</a>
+	</li>
+
+	<li><strong>soaptest2.lua</strong></li>
+	
+	<li>
+		<a href="../files/tcp.html">tcp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/util.html">util.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>soaptest2.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#buscaEndereco">buscaEndereco</a>&nbsp;(cep)</td>
+	<td class="summary">Gera tabela para chamada ao WebService de busca de endereço a partir do CEP </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#cotacaoDolar">cotacaoDolar</a>&nbsp;()</td>
+	<td class="summary">Gera tabela para chamada ao WebService de busca de cotação de várias moedas.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#handler">handler</a>&nbsp;(evt)</td>
+	<td class="summary">Função tratadora de eventos gerados pela aplicação NCL </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ipCountry">ipCountry</a>&nbsp;(ip)</td>
+	<td class="summary">Gera tabela para chamada ao WebService para obter o nome do país associado a um IP </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#lyric">lyric</a>&nbsp;(artist, song)</td>
+	<td class="summary">Gera tabela para chamada ao WebService de busca de letra de música </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#sendEmail">sendEmail</a>&nbsp;()</td>
+	<td class="summary">Gera tabela para chamada ao WebService de envio de email por SMTP APESAR DE O RETORNO SER TRUE, INDICANDO QUE O EMAIL FOI ENVIADO, O MESMO NÃO CHEGA.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#tempo">tempo</a>&nbsp;(city)</td>
+	<td class="summary">Gera tabela para chamada ao WebService para buscar da situação do tempo em uma determinada cidade </td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="buscaEndereco"></a><strong>buscaEndereco</strong>&nbsp;(cep)</dt>
+<dd>
+Gera tabela para chamada ao WebService de busca de endereço a partir do CEP
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  cep: Cep do qual deseja-se obter o endereço
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="cotacaoDolar"></a><strong>cotacaoDolar</strong>&nbsp;()</dt>
+<dd>
+Gera tabela para chamada ao WebService de busca de cotação de várias moedas. A função abaixo gera uma requisição para obter a cotação do Dolar em Reais
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="handler"></a><strong>handler</strong>&nbsp;(evt)</dt>
+<dd>
+Função tratadora de eventos gerados pela aplicação NCL
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  evt: Tabela contendo dados sobre o evento disparado
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ipCountry"></a><strong>ipCountry</strong>&nbsp;(ip)</dt>
+<dd>
+Gera tabela para chamada ao WebService para obter o nome do país associado a um IP
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  ip: IP do qual deseja-se saber a qual país está vinculado
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="lyric"></a><strong>lyric</strong>&nbsp;(artist, song)</dt>
+<dd>
+Gera tabela para chamada ao WebService de busca de letra de música
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  artist: Nome do artista
+	</li>
+	
+	<li>
+	  song: Nome da música da qual deseja-se obter a letra
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="sendEmail"></a><strong>sendEmail</strong>&nbsp;()</dt>
+<dd>
+Gera tabela para chamada ao WebService de envio de email por SMTP APESAR DE O RETORNO SER TRUE, INDICANDO QUE O EMAIL FOI ENVIADO, O MESMO NÃO CHEGA. PODE SER PROBLEMA DOS PARÂMETROS A SEREM ENVIADOS
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="tempo"></a><strong>tempo</strong>&nbsp;(city)</dt>
+<dd>
+Gera tabela para chamada ao WebService para buscar da situação do tempo em uma determinada cidade
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  city: Nome da cidade da qual deseja-se saber a situação do tempo
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

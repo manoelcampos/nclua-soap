@@ -1,0 +1,369 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+<h1>Modules</h1>
+<ul>
+
+	<li>
+		<a href="../modules/base64.html">base64</a>
+	</li>
+
+	<li>
+		<a href="../modules/http.html">http</a>
+	</li>
+
+	<li>
+		<a href="../modules/ncluasoap.html">ncluasoap</a>
+	</li>
+
+	<li>
+		<a href="../modules/tcp.html">tcp</a>
+	</li>
+
+	<li>
+		<a href="../modules/util.html">util</a>
+	</li>
+
+</ul>
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li><strong>RastreamentoCorreios.lua</strong></li>
+	
+	<li>
+		<a href="../files/TextField.html">TextField.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/base64.html">base64.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo1.html">exemplo1.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo2.html">exemplo2.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo3.html">exemplo3.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo4.html">exemplo4.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo5.html">exemplo5.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo6.html">exemplo6.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo7estados2.html">exemplo7estados2.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo8jax.html">exemplo8jax.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo9httpauth.html">exemplo9httpauth.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/http.html">http.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ncluasoap.html">ncluasoap.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/tcp.html">tcp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/util.html">util.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/wsdlparser.html">wsdlparser.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>RastreamentoCorreios.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#main.createMsg">main.createMsg</a>&nbsp;(codRastreamento)</td>
+	<td class="summary">Gera a tabela lua contendo os parâmetros para chamada do método no WebService.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#main.drawText">main.drawText</a>&nbsp;(text, flush)</td>
+	<td class="summary">Desenha uma mensagem na tela </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#main.enviaRequisicao">main.enviaRequisicao</a>&nbsp;()</td>
+	<td class="summary">Envia a requisição SOAP </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#main.getResponse">main.getResponse</a>&nbsp;(result)</td>
+	<td class="summary">Função para processar a resposta da requisição SOAP enviada ao WS </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#main.handler">main.handler</a>&nbsp;(evt)</td>
+	<td class="summary">Função tratadora de eventos </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#main.processaRetorno">main.processaRetorno</a>&nbsp;(retorno)</td>
+	<td class="summary">Processa a string retornada pelo WebService, separando os valores de data, local e situação em 3 strings separadas.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="main.createMsg"></a><strong>main.createMsg</strong>&nbsp;(codRastreamento)</dt>
+<dd>
+Gera a tabela lua contendo os parâmetros para chamada do método no WebService.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  codRastreamento: Código de rastreamento da encomenda nos Correios (13 caracteres)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="main.drawText"></a><strong>main.drawText</strong>&nbsp;(text, flush)</dt>
+<dd>
+Desenha uma mensagem na tela
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  text: Texto a ser desenhado
+	</li>
+	
+	<li>
+	  flush: Se é pra dar um flush no canvas, e exibir as alterações feitas nele. O valor padrão é true.
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="main.enviaRequisicao"></a><strong>main.enviaRequisicao</strong>&nbsp;()</dt>
+<dd>
+Envia a requisição SOAP
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="main.getResponse"></a><strong>main.getResponse</strong>&nbsp;(result)</dt>
+<dd>
+Função para processar a resposta da requisição SOAP enviada ao WS
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  result: Resultado da chamada ao método remoto via SOAP. No caso deste Web Service, o resultado é uma variável primitiva simples (ou seja, contendo apenas um valor)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="main.handler"></a><strong>main.handler</strong>&nbsp;(evt)</dt>
+<dd>
+Função tratadora de eventos
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  evt: Tabela contendo os parâmetros dos eventos disparados.
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="main.processaRetorno"></a><strong>main.processaRetorno</strong>&nbsp;(retorno)</dt>
+<dd>
+Processa a string retornada pelo WebService, separando os valores de data, local e situação em 3 strings separadas.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  retorno: String obtida da chamada ao WebService
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

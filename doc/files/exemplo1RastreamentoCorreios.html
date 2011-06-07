@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+<h1>Modules</h1>
+<ul>
+
+	<li>
+		<a href="../modules/base64.html">base64</a>
+	</li>
+
+	<li>
+		<a href="../modules/http.html">http</a>
+	</li>
+
+	<li>
+		<a href="../modules/ncluasoap.html">ncluasoap</a>
+	</li>
+
+	<li>
+		<a href="../modules/tcp.html">tcp</a>
+	</li>
+
+	<li>
+		<a href="../modules/util.html">util</a>
+	</li>
+
+</ul>
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/TextField.html">TextField.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/base64.html">base64.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo0.html">exemplo0.lua</a>
+	</li>
+
+	<li><strong>exemplo1RastreamentoCorreios.lua</strong></li>
+	
+	<li>
+		<a href="../files/exemplo2.html">exemplo2.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo3.html">exemplo3.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo4.html">exemplo4.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo5.html">exemplo5.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo6.html">exemplo6.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo7estados2.html">exemplo7estados2.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo8jax.html">exemplo8jax.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/exemplo9httpauth.html">exemplo9httpauth.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/http.html">http.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ncluasoap.html">ncluasoap.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/tcp.html">tcp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/util.html">util.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/wsdlparser.html">wsdlparser.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>exemplo1RastreamentoCorreios.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#main.createMsg">main.createMsg</a>&nbsp;(codRastreamento)</td>
+	<td class="summary">Gera a tabela lua contendo os parâmetros para chamada do método no WebService.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#main.drawText">main.drawText</a>&nbsp;(text, flush, clear, x, y, color)</td>
+	<td class="summary">Desenha uma mensagem na tela </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#main.enviaRequisicao">main.enviaRequisicao</a>&nbsp;()</td>
+	<td class="summary">Envia a requisição SOAP </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#main.getResponse">main.getResponse</a>&nbsp;(retorno, result)</td>
+	<td class="summary">Função para processar a resposta da requisição SOAP enviada ao WS </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#main.handler">main.handler</a>&nbsp;(evt)</td>
+	<td class="summary">Função tratadora de eventos </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#main.paintBackgroundRect">main.paintBackgroundRect</a>&nbsp;(imgPath)</td>
+	<td class="summary">Desenha a imagem de fundo da app </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#main.paintCloseBtn">main.paintCloseBtn</a>&nbsp;(x, y)</td>
+	<td class="summary">Exibe o botão fechar, calculando as coordenadas para que ele fique na parte inferior direita da área do canvas.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="main.createMsg"></a><strong>main.createMsg</strong>&nbsp;(codRastreamento)</dt>
+<dd>
+Gera a tabela lua contendo os parâmetros para chamada do método no WebService.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  codRastreamento: Código de rastreamento da encomenda nos Correios (13 caracteres)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="main.drawText"></a><strong>main.drawText</strong>&nbsp;(text, flush, clear, x, y, color)</dt>
+<dd>
+Desenha uma mensagem na tela
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  text: Texto a ser desenhado
+	</li>
+	
+	<li>
+	  flush: Se é pra dar um flush no canvas, e exibir as alterações feitas nele. O valor padrão é true.
+	</li>
+	
+	<li>
+	  clear: Indica se a área do canvas deve ser limpa ou não. O valor padrão é true
+	</li>
+	
+	<li>
+	  x: Posição horizontal onde o texto deve ser impresso
+	</li>
+	
+	<li>
+	  y: Posição vertical onde o texto deve ser impresso
+	</li>
+	
+	<li>
+	  color: Cor da fonte a ser utilizada
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="main.enviaRequisicao"></a><strong>main.enviaRequisicao</strong>&nbsp;()</dt>
+<dd>
+Envia a requisição SOAP
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="main.getResponse"></a><strong>main.getResponse</strong>&nbsp;(retorno, result)</dt>
+<dd>
+Função para processar a resposta da requisição SOAP enviada ao WS
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  retorno: 
+	</li>
+	
+	<li>
+	  result: Resultado da chamada ao método remoto via SOAP. No caso deste Web Service, o resultado é uma variável primitiva simples (ou seja, contendo apenas um valor)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="main.handler"></a><strong>main.handler</strong>&nbsp;(evt)</dt>
+<dd>
+Função tratadora de eventos
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  evt: Tabela contendo os parâmetros dos eventos disparados.
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="main.paintBackgroundRect"></a><strong>main.paintBackgroundRect</strong>&nbsp;(imgPath)</dt>
+<dd>
+Desenha a imagem de fundo da app
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  imgPath: Caminho do arquivo de imagem a ser usado no fundo
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="main.paintCloseBtn"></a><strong>main.paintCloseBtn</strong>&nbsp;(x, y)</dt>
+<dd>
+Exibe o botão fechar, calculando as coordenadas para que ele fique na parte inferior direita da área do canvas. A função não realiza um canvas:flush, que deve ser executado posteriormente quando desejado.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  x: Posição horizontal do botão. Se omitido, será colocado no canto esquerdo
+	</li>
+	
+	<li>
+	  y: Posição vertical do botão. Se omitido, será colocado no canto inferior
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>
