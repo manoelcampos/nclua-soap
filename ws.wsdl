@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:estadosws/server" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:estadosws/server">
+<types>
+<xsd:schema targetNamespace="urn:estadosws/server"
+>
+ <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+ <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+ <xsd:complexType name="Estado">
+  <xsd:all>
+   <xsd:element name="regiao" type="xsd:string"/>
+   <xsd:element name="ordem" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+</xsd:schema>
+</types>
+<message name="estadosRequest">
+  <part name="ordem" type="xsd:string" />
+  <part name="regiao" type="xsd:string" /></message>
+<message name="estadosResponse">
+  <part name="return" type="xsd:string" /></message>
+<message name="estados2Request">
+  <part name="dados" type="tns:Estado" /></message>
+<message name="estados2Response">
+  <part name="return" type="xsd:string" /></message>
+<portType name="estadosws/serverPortType">
+  <operation name="estados">
+    <documentation>Retorna a lista de estados, separados por \n, de uma determinada região brasileira. O campo ordem aceita 'estado' ou 'uf'.</documentation>
+    <input message="tns:estadosRequest"/>
+    <output message="tns:estadosResponse"/>
+  </operation>
+  <operation name="estados2">
+    <documentation>Funciona como a função estados, só que recebe uma struct contendo os parâmetro daquela.</documentation>
+    <input message="tns:estados2Request"/>
+    <output message="tns:estados2Response"/>
+  </operation>
+</portType>
+<binding name="estadosws/serverBinding" type="tns:estadosws/serverPortType">
+  <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="estados">
+    <soap:operation soapAction="manoelcampos.com#estados" style="rpc"/>
+    <input><soap:body use="encoded" namespace="manoelcampos.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="manoelcampos.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="estados2">
+    <soap:operation soapAction="manoelcampos.com#estados2" style="rpc"/>
+    <input><soap:body use="encoded" namespace="manoelcampos.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="manoelcampos.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+</binding>
+<service name="estadosws/server">
+  <port name="estadosws/serverPort" binding="tns:estadosws/serverBinding">
+    <soap:address location="http://manoelcampos.com/estadosws/server.php"/>
+  </port>
+</service>
+</definitions>
