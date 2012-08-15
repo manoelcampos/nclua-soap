@@ -9,7 +9,7 @@
         
         <descriptorBase>
         	<descriptor id="dVideo" region="rgVideo" />
-            <descriptor id="dLua" region="rgLua" focusIndex="luaIdx"/>
+            <descriptor id="dLua" region="rgLua" />
         </descriptorBase>
         
         <connectorBase>
@@ -33,7 +33,7 @@
         <media id="video" src="media/Wanna_Work_Together_-_Creative_Commons.avi" descriptor="dVideo"/>
         
         <media id="settings" type="application/x-ginga-settings">
-            <property name="service.currentKeyMaster" value="luaIdx"/>
+            <property name="service.currentKeyMaster" value="lua"/>
         </media>
         
         <media id="lua" src="exemplo1RastreamentoCorreios.lua" descriptor="dLua" >

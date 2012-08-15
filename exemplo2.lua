@@ -31,14 +31,16 @@ local function getResponse(result)
 end  
 
    
+--O WebService agora requer autenticaćão. Acesse a página do mesmo 
+--e procure informaćões
 local msgTable = {
   address = "http://9kgames.com/WS/WSIP2Country.asmx",
   namespace = "http://tempuri.org/",
-  operationName = "GetCountryCode",
+  operationName = "GetCountryCodeAuth",
   params = {
     ipAddress = "64.233.163.104" --IP do Google
   }  
 }
 
-ncluasoap.call(msgTable, getResponse)
+ncluasoap.call(msgTable, getResponse, "1.2")
 
