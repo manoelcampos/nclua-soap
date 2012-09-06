@@ -164,7 +164,7 @@ xmlParser = function(handler)
                     stripWS = 1, 
                     expandEntities = 1,
                     errorHandler = function(err,pos) 
-                                       error(format("%s [char=%d]\n",
+                                       error(string.format("%s [char=%d]\n",
                                                err or "Parse Error",pos))
                                    end,
                   }
@@ -302,13 +302,13 @@ xmlParser = function(handler)
                     if self._handler.endtag then
                         if attrs then
                             -- Shouldnt have any attributes in endtag
-                            self:_err(format("%s (/%s)",
+                            self:_err(string.format("%s (/%s)",
                                              self._errstr.endTagErr,
                                              tagname)
                                         ,pos)
                         end
                         if table.remove(self._stack) ~= tagname then
-                            self:_err(format("%s (/%s)",
+                            self:_err(string.format("%s (/%s)",
                                              self._errstr.unmatchedTagErr,
                                              tagname)
                                         ,pos)
