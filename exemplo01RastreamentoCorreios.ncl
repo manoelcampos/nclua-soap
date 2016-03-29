@@ -36,7 +36,7 @@
             <property name="service.currentKeyMaster" value="lua"/>
         </media>
         
-        <media id="lua" src="exemplo1RastreamentoCorreios.lua" descriptor="dLua" >
+        <media id="lua" src="exemplo01RastreamentoCorreios.lua" descriptor="dLua" >
         </media>
         
         <link xconnector="onEndStart">
