@@ -28,7 +28,7 @@ O módulo utiliza a biblioteca [LuaXML](https://github.com/manoelcampos/LuaXML) 
 Pré-Requisitos
 --------------
 
-É recomendado a utilização do [Ginga Virtual STB 0.11.2 rev 23 ou superior](http://www.softwarepublico.gov.br/ver-comunidade?community_id=1101545). A versão anterior do Ginga VSTB possuia algumas dificuldades para acesso à rede a partir da VM, normalmente necessitando de configurações na interface de rede da mesma. Antes de usar o NCLua SOAP na VM, verifique se ela está acessando a rede local/internet (usando ping, telnet, wget, curl ou qualquer comando similar). Para isto, fundamentalmente, na tela inicial da VM deve ser exibido o IP da mesma. Caso não esteja conseguindo acesso à rede, tente alterar o modo da interface de rede da VM de bridge para NAT ou vice-versa (é necessário reiniciar a VM após tal alteração).
+É recomendado a utilização do [Ginga Virtual STB 0.11.2 rev 23 ou superior](http://www.gingancl.org.br). A versão anterior do Ginga VSTB possuia algumas dificuldades para acesso à rede a partir da VM, normalmente necessitando de configurações na interface de rede da mesma. Antes de usar o NCLua SOAP na VM, verifique se ela está acessando a rede local/internet (usando ping, telnet, wget, curl ou qualquer comando similar). Para isto, fundamentalmente, na tela inicial da VM deve ser exibido o IP da mesma. Caso não esteja conseguindo acesso à rede, tente alterar o modo da interface de rede da VM de bridge para NAT ou vice-versa (é necessário reiniciar a VM após tal alteração).
 
 Artigo Publicado
 ----------------
