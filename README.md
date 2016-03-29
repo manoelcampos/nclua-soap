@@ -33,7 +33,7 @@ Pré-Requisitos
 Artigo Publicado
 ----------------
 
-O Artigo NCLua SOAP: Acesso à Web Services em Aplicações de TVDi foi publicado no Workshop de Computação Aplicada em Governo Eletrônico (WCGE 2011), [disponível aqui](https://www4.serpro.gov.br/wcge2011/artigos-selecionados). Caso o link esteja quebrado, o artigo também está disponível [aqui](artigos-tutoriais/Artigo-NCLua SOAP - Acesso a Web Services em aplicacoes de TVDi, 2011.pdf). Para trabalhos acadêmicos e projetos que utilizem o NCLua SOAP, favor referenciar o artigo publicado. Para referenciar o artigo em documentos Latex, utilize o código bibtex [deste link](artigos-tutoriais/ncluasoap.bib).
+O Artigo NCLua SOAP: Acesso à Web Services em Aplicações de TVDi foi publicado no Workshop de Computação Aplicada em Governo Eletrônico (WCGE 2011), [disponível aqui](https://www4.serpro.gov.br/wcge2011/artigos-selecionados). Caso o link esteja quebrado, o artigo também está disponível [aqui](artigos-tutoriais/Artigo-NCLuaSOAP-Acesso-a-Web-Services-em-aplicacoes-de-TVDi-2011.pdf). Para trabalhos acadêmicos e projetos que utilizem o NCLua SOAP, favor referenciar o artigo publicado. Para referenciar o artigo em documentos Latex, utilize o código bibtex [deste link](artigos-tutoriais/ncluasoap.bib).
 
 Documentação
 ------------
