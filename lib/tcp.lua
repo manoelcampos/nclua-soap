@@ -1,6 +1,11 @@
 ---Módulo para realização de conexões TCP. 
 --Utiliza co-rotinas de lua para simular multi-thread.
 --Fonte: <a href="http://www.telemidia.puc-rio.br/~francisco/nclua/index.html">Tutorial de NCLua</a>
+--Contribuições
+--  Manoel Campos da Silva Filho
+--    * conversão da porta de conexão para number para corrigir problemas
+--      de implementações diferentes de Ginga (ver função handler)
+--@version 1.1
 --@class module
 
 -- TODO:

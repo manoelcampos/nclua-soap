@@ -1,11 +1,13 @@
----Módulo NCLua SOAP v0.5.6.6: Módulo desenvolvido inteiramente em Lua, para acesso a 
+---Módulo NCLua SOAP v0.6: Módulo desenvolvido inteiramente em Lua, para acesso a 
 --WebServices SOAP em aplicações de TV Digital.<p/>
 --Utiliza o módulo LuaXML, disponível em <a href="http://lua-users.org/wiki/LuaXml">http://lua-users.org/wiki/LuaXml</a>, 
 --que foi adaptado para Lua 5.x e adicionado parâmetro parseAttributes
 --ao método xmlParser.parse para indicar se os atributos das tags
 --devem ser processados ou não. <p/>
---Licença: <a href="http://creativecommons.org/licenses/by-nc-sa/2.5/br/">http://creativecommons.org/licenses/by-nc-sa/2.5/br/</a>
---@author Manoel Campos da Silva Filho - <a href="http://manoelcampos.com">http://manoelcampos.com</a> 
+--@license <a href="http://creativecommons.org/licenses/by-nc-sa/2.5/br/">http://creativecommons.org/licenses/by-nc-sa/2.5/br/</a>
+--@author Manoel Campos da Silva Filho
+--<a href="http://manoelcampos.com">http://manoelcampos.com</a> 
+--@author Paulo Roberto de Lira Gondim
 --@class module
 
 --http://www.xml.com/pub/a/2000/11/29/schemas/part1.html?page=8
@@ -13,20 +15,33 @@
 --http://www.quackit.com/xml/tutorial/xml_default_namespace.cfm
 
 require "util"
-require "tcp"
 require "http"
 dofile("lib/LuaXML/xml.lua")
 dofile("lib/LuaXML/handler.lua")
 
-local _G, util, tcp, http, print, string, table, pairs, 
-      simpleTreeHandler, xmlParser, type, tostring, error
+local _G, http, print, string, table, pairs, 
+      simpleTreeHandler, type, tostring, error
       = 
-      _G, util, tcp, http, print, string, table, pairs,
-      simpleTreeHandler, xmlParser, type, tostring, error
+      _G, http, print, string, table, pairs,
+      simpleTreeHandler, type, tostring, error
 
 module "ncluasoap"
 
-local userAgent = "ncluasoap/0.5.6.6"
+local userAgent = "ncluasoap/0.6"
+
+---Obtém um elemento _attr em uma tabela lua,
+--que representa os atributos de uma tag xml,
+--e gera a string correspondente à lista
+--de tais atributos para ser inserida
+--dentro da tag de abertura de um xml
+--sendo gerado a partir de uma tabela lua.
+function attrToXml(attrTable)
+  local s = ""
+  for k, v in pairs(attrTable) do
+      s = s .. " " .. k .. "=" .. '"' .. v .. '"'
+  end
+  return s
+end
 
 ---Converte uma tabela lua para uma string que representa um trecho de código XML
 --@param tb Tabela a ser convertida
@@ -80,10 +95,12 @@ local function tableToXml(tb, level, elevateAnonymousSubTables, tableName)
 	        --Então, se é pra elevar esta sub-tabela anônima, processa seus campos como
 	        --se estivessem fora da sub-tabela, como explicado na documentação desta função.
             if elevateAnonymousSubTables then  
-               table.insert(xmltb, spaces..tableToXml(v))
+               table.insert(xmltb, spaces..tableToXml(v, level+1))
             else
+               local attrs = attrToXml(v._attr)
+               v._attr = nil
                table.insert(xmltb, 
-                 spaces..'<'..tableName..'>\n'..tableToXml(v)..
+                 spaces..'<'..tableName..attrs..'>\n'..tableToXml(v, level+1)..
                  '\n'..spaces..'</'..tableName..'>') 
             end
          else --se o elemento é uma tabela e sua chave tem um nome definido    
@@ -101,7 +118,7 @@ local function tableToXml(tb, level, elevateAnonymousSubTables, tableName)
               --e inclui seus elementos como sub-tags contendo seus respectivos nomes.
               table.insert(
                  xmltb, 
-                 spaces..'<'..k..'>\n'.. tableToXml(v, level)..
+                 spaces..'<'..k..'>\n'.. tableToXml(v, level+1)..
                  '\n'..spaces..'</'..k..'>')
             end
          end
@@ -216,6 +233,8 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
   end
 
   local xmltb = {}
+  --se tem um ponto no nome do metodo, o mesmo eh metodo de uma classe
+  local isOOMethod = string.find(msgTable.operationName, "%.")
   
   --SOAP 1.2 message
   --table.insert(xmltb, '')
@@ -223,6 +242,10 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
   table.insert(xmltb, '<'..nsPrefix..':Envelope ')
   table.insert(xmltb, ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ')
   table.insert(xmltb, ' xmlns:xsd="http://www.w3.org/2001/XMLSchema" ')
+  if isOOMethod then
+     table.insert(xmltb, ' ' .. nsPrefix..':encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" ')
+     table.insert(xmltb, ' xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" ')
+  end
   if soapVersion == "1.1" then
      table.insert(xmltb, 
        ' xmlns:'..nsPrefix..'="http://schemas.xmlsoap.org/soap/envelope/" ')
@@ -231,7 +254,12 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
        ' xmlns:'..nsPrefix..'="http://www.w3.org/2003/05/soap-envelope" ')
   end
   local serviceNsPrefix = ""
-  if externalXsd then
+  --Se o XSD eh um arquivo externo ou os metodos publicados no WS
+  --sao metodos de uma classe 
+  --(devido o nome da operacao estar no formato Classe.NomeMetodo)
+  --eh preciso incluir o namespace do WS na lista de namespaces 
+  --na requisicao
+  if externalXsd or isOOMethod then
      serviceNsPrefix = "ns1"
      table.insert(xmltb, ' xmlns:'..serviceNsPrefix..'="'..msgTable.namespace..'" ')     
   end
@@ -247,7 +275,10 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
   
   table.insert(xmltb, '  <'..nsPrefix..':Body>')
   if externalXsd then
-    table.insert(xmltb, '    <'..serviceNsPrefix..':'..msgTable.operationName..'>')
+     table.insert(xmltb, '    <'..serviceNsPrefix..':'..msgTable.operationName..'>')
+  elseif isOOMethod then
+     table.insert(xmltb, '    <'..serviceNsPrefix..':' .. msgTable.operationName .. 
+       ' xmlns:'..serviceNsPrefix..'="'..msgTable.namespace..'">')
   else
     table.insert(xmltb, '    <'..msgTable.operationName..' xmlns="'..msgTable.namespace..'">')
   end
@@ -271,7 +302,7 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
 	  table.insert(xmltb, tableToXml(msgTable.params, 3, true))
   end
 
-  if externalXsd then
+  if externalXsd or isOOMethod then
     table.insert(xmltb, '    </'..serviceNsPrefix..':'..msgTable.operationName..'>')
   else
     table.insert(xmltb, '    </'..msgTable.operationName..'>')		
@@ -281,7 +312,7 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
   table.insert(xmltb, '</'..nsPrefix..':Envelope>')
   
   local xml = table.concat(xmltb, '\n')
-  print(xml)
+  --print(xml)
   
   local httpContentType = ''
   if soapVersion == "1.1" then
@@ -290,6 +321,7 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
  		 if string.sub(msgTable.namespace, #msgTable.namespace) ~= '/' then
 		    separator = '/'
 		 end 
+
 		 soapAction = msgTable.namespace..separator..msgTable.operationName
      httpContentType = 
        'Content-Type: text/xml; charset=utf-8\n' ..
@@ -299,7 +331,7 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
   end
   
   local function getHttpResponse(header, body)
-     print(""); print(body)
+     --print("\n",body)
      local xmlhandler = simpleTreeHandler()
      local xmlparser = xmlParser(xmlhandler)
      xmlparser:parse(body, false)
@@ -322,7 +354,7 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
              end
           end
         end
-        print("\n\nResponse nsPrefix = "..nsPrefix.."\n\n")
+        --print("\n\nResponse nsPrefix = "..nsPrefix.."\n\n")
     
     
         local envelope = nsPrefix.."Envelope"
@@ -360,3 +392,19 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
   http.request(url, getHttpResponse, "POST", xml, userAgent,   
                httpContentType, httpUser, httpPasswd, port)
 end
+
+---Grava uma tabela em um arquivo xml no disco
+--@param tb Tabela a partir da qual será gerado o xml
+--@param fileName Nome do arquivo xml a ser criado
+--@param encoding Codificação de caracteres a ser definida
+--no cabeçalho do xml (opcional, valor padrão ISO-8859-1)
+function writeToXml(tb, fileName, encoding)
+ local encoding = encoding or "ISO-8859-1"
+ local xmlText = tableToXml(tb, 1, false, getFirstKey(tb))
+ xmlText = '<?xml version="1.0" encoding="'.. encoding ..'"?>\n' .. xmlText
+ createFile(xmlText, fileName)
+ return xmlText
+end
+
+
+

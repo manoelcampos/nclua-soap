@@ -141,8 +141,11 @@
 --  History
 --  =======
 --  Added parameter parseAttributes (boolean) in xmlParser.parse method
---  If true, tag attributtes are parsed. The default value is true.
---  by Manoel Campos (http://manoelcampos.com)
+--  If true (default value), tag attributtes are parsed. 
+--  by Manoel Campos da Silva Filho
+--  http://manoelcampos.com
+--  http://about.me/manoelcampos
+
 --
 --  $Id: xml.lua,v 1.1.1.1 2001/11/28 06:11:33 paulc Exp $
 --

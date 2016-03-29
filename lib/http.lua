@@ -3,11 +3,10 @@
 --Utiliza a classe tcp disponibilizada no
 -- <a href="http://www.telemidia.puc-rio.br/~francisco/nclua/tutorial/index.html">Tutorial de NCLua</a>
 -- e o módulo de conversão de/para base64 disponível em <a href="http://lua-users.org/wiki/BaseSixtyFour">Lua Users</a><p/>
---@licence: <a href="http://creativecommons.org/licenses/by-nc-sa/2.5/br/">http://creativecommons.org/licenses/by-nc-sa/2.5/br/</a>
---@author Manoel Campos da Silva Filho<br/>
---Professor do Instituto Federal de Educação, Ciência e Tecnologia do Tocantins<br/>
---Mestrando em Engenharia Elétrica na Universidade de Brasília, na área de TV Digital<br/>
+--@licence <a href="http://creativecommons.org/licenses/by-nc-sa/2.5/br/">http://creativecommons.org/licenses/by-nc-sa/2.5/br/</a>
+--@author Manoel Campos da Silva Filho
 --<a href="http://manoelcampos.com">http://manoelcampos.com</a>
+--@author Paulo Roberto de Lira Gondim
 --@class module
 --<p/>
 

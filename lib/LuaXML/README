@@ -1,5 +1,5 @@
 
-LuaXML-0.0.0
+LuaXML-0.0.1
 ============
 
 This is an initial release of LuaXML - a native XML parser for Lua.
@@ -33,6 +33,19 @@ to all the current XML related activity on lua-l and as a result isnt
 quite as well packaged/docuemnted as I would like. I will be working
 on fixing this asp.
 
-Paul Chakravarti
-paulc@passtheaardvark.com
-28 Nov 2001
+License:
+========
+This code is freely distributable under the terms of the Lua license
+(http://www.lua.org/copyright.html)
+
+
+Author: 
+  Paul Chakravarti
+  paulc@passtheaardvark.com
+  28 Nov 2001
+Contributors:
+	This Lua 5.x version was adapted by Manoel Campos da Silva Filho
+	http://manoelcampos.com
+	http://about.me/manoelcampos
+  24 Sep 2012
+

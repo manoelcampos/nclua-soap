@@ -16,14 +16,22 @@
   <h3><a href="http://ncluasoap.manoelcampos.com" target="_blank">http://ncluasoap.manoelcampos.com</a></h3>
 </div>
 
-<h2>NCLua SOAP 0.5.6.x beta: <a href="" target="_blank">detalhes da versão</a></h2>
+<h2>NCLua SOAP 0.6 beta:</h2>
 
 <ul>
   <li>Tratamento de falhas (fault) retornadas pelo Web Service. Assim, o parâmetro result
   da função de callback (que é chamada quando a resposta do WS é obtida)
   terá um campo faultcode e faultstring no lugar do retorno esperado.
   </li>
+  <li>Inclusão de método para gravar em arquivo XML uma tabela lua</li>
+  <li>Inclusão de recurso para não perder atributos ao converter
+  de xml para tabela lua e depois converter de volta
+  para xml. Antes, os atributos das tags XML 
+  era ignorados ao gerar um novo xml a partir
+  de uma tabela lua gerada a partir de um xml.</li>
   <li>Inclusão de parâmetro soapHeader no método call para permitir passar um cabeçalho na requisição SOAP</li>
+  <li>Suporte a chamadas de métodos de classes publicados em um WS. Desta forma, é possível chamar
+  um método remoto no formato NomeDaClasse.NomeDoMetodoRemoto</li>
 </ul>
 
 

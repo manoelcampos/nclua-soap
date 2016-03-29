@@ -1,6 +1,7 @@
 ---Módulo de funções de uso geral para TVD v1.3.4
 --@author Manoel Campos da Silva Filho
 --<a href="http://manoelcampos.com">http://manoelcampos.com</a>
+--@author Paulo Roberto de Lira Gondim
 --@license Atribuição-Uso não-comercial-Compartilhamento pela mesma licença http://creativecommons.org/licenses/by-nc-sa/2.5/br/
 --@class module
 
@@ -188,9 +189,6 @@ function paintText(x, y, text, fontName, fontSize, fontColor)
 end
 
 
---DEVIDO AO USO DO MÓDULO IO, ESTA FUNÇÃO
---NÃO É PERMITIDA NO CONTEXTO DE TVD,
---POIS O MÓDULO IO NÃO FAZ PARTE DO GINGA
 ---Verifica se um arquivo existe
 --@param fileName Nome do arquivo a ser verificado
 --@return Retorna true se o arquivo existir
