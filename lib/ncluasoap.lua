@@ -14,10 +14,10 @@
 --http://www.developerfusion.com/article/3720/understanding-xml-namespaces/5/
 --http://www.quackit.com/xml/tutorial/xml_default_namespace.cfm
 
-require "util"
-require "http"
-dofile("lib/LuaXML/xml.lua")
-dofile("lib/LuaXML/handler.lua")
+require "ncluahttp"
+require "ncluahttp/util"
+dofile("lib/luaxml/xml.lua")
+dofile("lib/luaxml/handler.lua")
 
 local _G, http, print, string, table, pairs, 
       simpleTreeHandler, type, tostring, error
