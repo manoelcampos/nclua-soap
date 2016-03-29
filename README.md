@@ -38,7 +38,7 @@ O Artigo NCLua SOAP: Acesso à Web Services em Aplicações de TVDi foi publicad
 Documentação
 ------------
 
-A documentação da biblioteca foi gerada com LuaDoc e está [disponível para consulta online aqui](http://manoelcampos.github.io/NCLuaSOAP/docs).
+A documentação da biblioteca foi gerada com LuaDoc e está [disponível para consulta online aqui](http://manoelcampos.github.io/NCLuaSOAP/doc/).
 
 Utilizando o NCLua SOAP
 -----------------------
