@@ -36,17 +36,27 @@ local msgTable = {
   }
 }
  
---Executa o método remoto, definido dentro da msgTable,
---gerando uma requisição SOAP, enviando ao WS e obtendo o resultado.
---getResponse é uma função de callback que será executada
---automaticamente, assim que a resposta da chamada remota for obtida.
-ncluasoap.call(msgTable, getResponse)
+local function main()
+  --Executa o método remoto, definido dentro da msgTable,
+  --gerando uma requisição SOAP, enviando ao WS e obtendo o resultado.
+  --getResponse é uma função de callback que será executada
+  --automaticamente, assim que a resposta da chamada remota for obtida.
+  ncluasoap.call(msgTable, getResponse)
 
---Esta linha é executada automaticamente após a chamada de ncluasoap.call
---A chamada a ncluasoap.call retorna imediatamente, pois é uma chamada
---assíncrona, devido à particularidades do módulo TCP de NCLua.
---Assim, NÃO é possível obter o retorna do método remoto
---fazendo algo como retorno = ncluasoap.call(msgTable).
---Tal instrução não funciona.
-print("---------------------------Chamou ncluasoap.call")
+  --Esta linha é executada automaticamente após a chamada de ncluasoap.call
+  --A chamada a ncluasoap.call retorna imediatamente, pois é uma chamada
+  --assíncrona, devido à particularidades do módulo TCP de NCLua.
+  --Assim, NÃO é possível obter o retorna do método remoto
+  --fazendo algo como retorno = ncluasoap.call(msgTable).
+  --Tal instrução não funciona.
+  print("---------------------------Chamou ncluasoap.call")
+end
 
+--Chama a função main que executará a chamada ao WS
+--em modo protegido, permitindo tratar erros gerados.
+local ok, res = pcall(main)
+
+if not ok then
+   print("\n\nError: "..res, "\n\n")
+   return -1
+end

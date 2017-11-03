@@ -121,17 +121,17 @@ function TextField:new(top, left, width,
 	self.__index = self
 	o:paint()
 	
-  --TODO: Este tratamento de evento não é o ideal
-  --quando a aplicação possuir mais de um campo,
-  --o que é o comum de ocorrer. Assim, esta
-  --implementação tem apenas a intenção
-  --de ser utilizada por aplicações de exemplo.
-  --Para uma aplicação com vários campos,
-  --é preciso evoluir este modelo de tratamento
-  --de eventos, criando um handler único
-  --para todos os componentes, e não
-  --um handler para cada componente, como
-  --está sendo feito aqui.
+	--TODO: Este tratamento de evento não é o ideal
+	--quando a aplicação possuir mais de um campo,
+	--o que é o comum de ocorrer. Assim, esta
+	--implementação tem apenas a intenção
+	--de ser utilizada por aplicações de exemplo.
+	--Para uma aplicação com vários campos,
+	--é preciso evoluir este modelo de tratamento
+	--de eventos, criando um handler único
+	--para todos os componentes, e não
+	--um handler para cada componente, como
+	--está sendo feito aqui.
 	function o.handler(evt)
 	  o:processKey(evt)
 	end
