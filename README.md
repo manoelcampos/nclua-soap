@@ -1,14 +1,12 @@
-Introdução
-----------
+# Introdução
 
-[![](media/logotipo-NCLuaSOAP-pequeno.png)](media/logotipo-NCLuaSOAP-pequeno.png)O NCLua SOAP é um módulo escrito totalmente em Lua, que permite o acesso a Web Services SOAP a partir de aplicações de TV Digital. O módulo está em fase beta e implementa as versões 1.1 e 1.2 do protocolo SOAP.
+[![](media/logotipo-NCLuaSOAP-pequeno.png)](media/logotipo-NCLuaSOAP-pequeno.png)
 
+O NCLua SOAP é um módulo escrito totalmente em Lua, que permite o acesso a Web Services SOAP a partir de aplicações de TV Digital. O módulo está em fase beta e implementa as versões 1.1 e 1.2 do protocolo SOAP.
 
 O projeto facilita a convergência entre Web e TV, permitindo o consumo de diferentes serviços, construídos em diferentes linguagens.
 
-
-Justificativa
--------------
+# Justificativa
 
 Consumir Web Service SOAP a partir de uma aplicação NCL/Lua para TV Digital tem sido um desejo de muitos, como tenho acompanhado nos fóruns que participo. Os Web Services são bastante utilizados para integração de aplicações, heterogêneas ou não, pois utilizam um protocolo padronizado pela W3C, baseado em XML e trafegando normalmente por HTTP, sem sofrer problemas com firewalls (pelo bloqueio de portas). Eles permitem a criação de aplicações distribuídas, retirando das aplicações clientes, parte da carga de processamento.
 
@@ -18,32 +16,32 @@ Como estas bibliotecas não fazem parte das normas do Sistema Brasileiro de TV D
 
 Sabe-se que ao menos na versão 0.11.2 da implementação de referência do Ginga, disponível no Portal do Software Público, está sendo utilizada a biblioteca LuaSocket para implementar o módulo tcp, (definido em norma ABNT) para aplicações NCLua. No entanto, esta biblioteca é apenas usada como camada subjacente ao módulo tcp, sendo que suas funções não devem ser utilizadas pelas aplicações desenvolvidas. Deve-se considerar apenas a interface disponibilizada pelo módulo tcp (prevista em norma e existente em qualquer receptor). Com isto, devido ao meu trabalho de mestrado e necessidade de tal recurso, desenvolvi o NCLua SOAP, um módulo escrito completamente em Lua, para ser utilizado em aplicações NCLua para TV Digital.
 
-
-Outros módulos utilizados (já inclusos no projeto)
---------------------------------------------------
-
-O módulo utiliza a biblioteca [LuaXML](https://github.com/manoelcampos/LuaXML) (que foi adaptada para Lua 5) e o módulo [NCLua HTTP](https://github.com/manoelcampos/NCLuaHTTP) desenvolvido por mim. 
-
-
-Pré-Requisitos
---------------
+# Pré-Requisitos
 
 É recomendado a utilização do [Ginga Virtual STB 0.11.2 rev 23 ou superior](http://www.gingancl.org.br). A versão anterior do Ginga VSTB possuia algumas dificuldades para acesso à rede a partir da VM, normalmente necessitando de configurações na interface de rede da mesma. Antes de usar o NCLua SOAP na VM, verifique se ela está acessando a rede local/internet (usando ping, telnet, wget, curl ou qualquer comando similar). Para isto, fundamentalmente, na tela inicial da VM deve ser exibido o IP da mesma. Caso não esteja conseguindo acesso à rede, tente alterar o modo da interface de rede da VM de bridge para NAT ou vice-versa (é necessário reiniciar a VM após tal alteração).
 
-Artigo Publicado
-----------------
+Um tutorial de como estrutura seu ambiente de desenvolvimento está disponível [aqui](http://www.gingadf.com.br/blogGinga/tutorial-como-estruturar-seu-ambiente-de-desenvolvimento-para-o-ginga-ncl/).
+
+# Artigo Publicado
 
 O Artigo NCLua SOAP: Acesso à Web Services em Aplicações de TVDi foi publicado no Workshop de Computação Aplicada em Governo Eletrônico (WCGE 2011), [disponível aqui](https://www4.serpro.gov.br/wcge2011/artigos-selecionados). Caso o link esteja quebrado, o artigo também está disponível [aqui](artigos-tutoriais/Artigo-NCLuaSOAP-Acesso-a-Web-Services-em-aplicacoes-de-TVDi-2011.pdf). Para trabalhos acadêmicos e projetos que utilizem o NCLua SOAP, favor referenciar o artigo publicado. Para referenciar o artigo em documentos Latex, utilize o código bibtex [deste link](artigos-tutoriais/ncluasoap.bib).
 
-Documentação
-------------
+# Documentação
 
 A documentação da biblioteca foi gerada com LuaDoc e está [disponível para consulta online aqui](http://manoelcampos.github.io/NCLuaSOAP/doc/).
 
-Utilizando o NCLua SOAP
------------------------
+# Baixando o Projeto
 
-Para usar o NCLua SOAP, basta adicionar as linhas abaixo ao seu script lua:
+Para utilizar o projeto é preciso baixar os fontes disponíveis aqui.
+O NCLua SOAP utiliza a biblioteca [LuaXML](https://github.com/manoelcampos/LuaXML) (adaptada para Lua 5) e o módulo [NCLua HTTP](https://github.com/manoelcampos/NCLuaHTTP) que já estão incluídos como dependências. No entanto, se você baixar o zip, os fontes de tais módulos adicionais **não** são baixados e o NCLua SOAP **não** irá funcionar.
+
+Para baixar todos os fontes necessários (incluindo as versões corretas dos módulos citados), execute o comando abaixo no terminal (pode até mesmo ser diretamente dentro da máquina virtual Ginga):
+
+`git clone --recursive https://github.com/manoelcampos/NCLuaSOAP.git`
+
+# Utilizando o NCLua SOAP
+
+Para usar o NCLua SOAP, é preciso adicionar as linhas abaixo ao seu script lua:
 
 ```lua
 --Adiciona o diretório lib (onde estão os arquivos do NCLua SOAP) ao path de bibliotecas,
@@ -71,9 +69,22 @@ msgTable = {
 
 A função call ainda aceita uma função de callback, que é explicada em mais detalhes na documentação do NCLua SOAP e principalmente no módulo http (motivo da necessidade de uso de tais funções).
 
+# Executando seu script NCLua
 
-Exemplos
---------
+O NCLua SOAP é um conjunto de scripts NCLua. Assim, as aplicações criadas **não** podem ser executadas diretamente com um comando `lua nome_do_script.lua`. Se você não sabe o que é um script NCLua, sugiro ler as referências abaixo:
+
+- [NCLua - Objetos Imperativos Lua na Linguagem Declarativa NCL](http://www.ceu-lang.org/chico/nclua_webmedia.pdf)
+- [Documentação de NCLua](http://www.telemidia.puc-rio.br/~francisco/nclua/)
+
+Depois ter ter criado seu script como exemplificado na seção anterior, é preciso criar um arquivo NCL para executar seu script por meio do Ginga-NCL. Explicar os detalhes da linguagem NCL está fora do escopo deste artigo.
+
+O seu arquivo NCL deve ser responsável por carregar o arquivo lua, como mostrado em exemplos como [exemplo00.ncl](exemplo00.ncl). A linha de código chave em tal exemplo é `<media id="lua" src="exemplo00.lua" descriptor="dLua" />`, onde é especificado o nome do arquivo lua a ser carregado. Troque o arquivo `exemplo00.lua` para o nome do seu arquivo lua.
+
+Por fim, estando dentro do Ginga Virtual STB, para executar a aplicação NCL e assim carregar o script lua, execute no terminal da VM:
+
+`ginga --ncl nome_do_arquivo.ncl`
+
+# Exemplos
 
 Foram disponibilizadas algumas aplicações de exemplo, que consomem Web Services variados. Para testar os diversos Web Services usados na segunda aplicação de exemplo, basta descomentar uma chamada a ncluasoap.call, dentro da função handler do arquivo exemplo2.lua, comentando o anterior (por motivos de clareza). As aplicações não possuem interface gráfica, logo, todo o resultado é mostrado em mensagens no console. Leia os comentários existentes nos exemplos, pois alguns serviços requerem configurações extras para funcionar (como cadastro/login e senha). Um exemplo completo, mostrando como consumir um Web Service de cotação de moedas, é exibido abaixo.
 
@@ -130,26 +141,19 @@ Tutoriais
 [Criando um Web Service PHP com NuSoap e acessando-o com NCLua Soap - por Johnny Moreira Gomes (UFJF)](http://www.ufjf.br/lapic/files/2010/05/TutorialNuSoapNCLuaSoap.pdf). Caso o link esteja quebrado, o tutorial pode ser acessado [aqui](artigos-tutoriais/tutorial-nusoap-ncluasoap.pdf).
 
 
-FAQ
----
+# FAQ
 	
 1. **Porque ocorre o erro "HTTP 415: Media Unsupported"?** Este erro pode ocorrer devido à versão da requisição SOAP enviada não ser suportada pelo Web Service. Verifique a documentação da função call do módulo NCLua SOAP para saber como especificar a versão do SOAP a ser utilizada pelo módulo. Se não souber qual versão do protocolo SOAP o Web Service reconhece, teste os valores listados na documentação da função call do módulo.	
 2. **Porque ocorre o erro "unprotected error in call to Lua API (tcp.lua:xx: /usr/local/lib/lua/5.1/tcp_event.lua:xx: assertion failed!)"?** Este erro pode ocorrer devido a aplicação, rodando no Ginga Virtual STB, não ter acesso à Internet/LAN. Tal problema era comum na versão anterior a 0.11.2 do Ginga Virtual STB. Verifique a seção de pré-requisitos para mais informações.
 
-Fórum de Discussão
-------------------
+# Fórum de Discussão
 
 Para tirar dúvidas, relatar bugs, propor melhorias e quaisquer outros assuntos relacionados a Web Services em aplicações NCLua para TV Digital, acesse o [Fórum NCLua SOAP no Google Groups](http://groups.google.com/group/ncluasoap).
 
-
-Aviso
------
+# Aviso
 
 O módulo implementa as versões 1.1 e 1.2 do protocolo SOAP, e está em fase beta, podendo conter bugs e inconsistências com o padrão. Assim, use por sua conta e risco! Dúvidas, críticas, sugestões e, principalmente, relatos de problemas com algum WebService, são bem vindos e devem ser enviados pelo Fórum mostrado acima.
 
-
-
-Licença
--------
+# Licença
 
 O projeto é licenciado sob a [Creative Commons Atribuição-NãoComercial-CompartilhaIgual 2.5 Brasil (CC BY-NC-SA 2.5 BR)](http://creativecommons.org/licenses/by-nc-sa/2.5/br/)
