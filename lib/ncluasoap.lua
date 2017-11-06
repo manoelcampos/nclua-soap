@@ -1,4 +1,4 @@
----Módulo NCLua SOAP v0.6: Módulo desenvolvido inteiramente em Lua, para acesso a 
+---Módulo NCLua SOAP v0.7: Módulo desenvolvido inteiramente em Lua, para acesso a 
 --WebServices SOAP em aplicações de TV Digital.<p/>
 --Utiliza o módulo LuaXML, disponível em <a href="http://lua-users.org/wiki/LuaXml">http://lua-users.org/wiki/LuaXml</a>, 
 --que foi adaptado para Lua 5.x e adicionado parâmetro parseAttributes
@@ -14,15 +14,17 @@
 --http://www.developerfusion.com/article/3720/understanding-xml-namespaces/5/
 --http://www.quackit.com/xml/tutorial/xml_default_namespace.cfm
 
+package.path = package.path .. ';lib/?/?.lua;lib/ncluahttp/tcp.lua'
+
 require "ncluahttp"
 require "ncluahttp/util"
 dofile("lib/luaxml/xml.lua")
 dofile("lib/luaxml/handler.lua")
 
-local _G, http, print, string, table, pairs, 
+local _G, ncluahttp, print, string, table, pairs, 
       simpleTreeHandler, type, tostring, error
       = 
-      _G, http, print, string, table, pairs,
+      _G, ncluahttp, print, string, table, pairs,
       simpleTreeHandler, type, tostring, error
 
 module "ncluasoap"
@@ -31,7 +33,7 @@ module "ncluasoap"
 -- e a resposta HTTP.
 debug = false
 
-local userAgent = "ncluasoap/0.6"
+local userAgent = "ncluasoap/0.7"
 
 ---Obtém um elemento _attr em uma tabela lua,
 --que representa os atributos de uma tag XML,
@@ -335,9 +337,9 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
   
   local xml = table.concat(xmltb, '\n')
   if debug then
-    print "\n\nSOAP XML Request"
+    print "\n\n-----------------SOAP XML Request-----------------"
     print(xml)
-    print "\n\n"
+    print "--------------------------------------------------\n\n"
   end
  
   local httpContentType = ''
@@ -358,10 +360,12 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
   
   local function getHttpResponse(header, body)
       if debug then
-         print("\n\nHTTP Response")
-         print("Header: ", header)
-         print("Body: ", body)
-         print "\n\n"
+         print("\n\n-----------------HTTP Response-----------------")
+         print("Header:")
+         print(header, "\n")
+         print("Body:")
+         print(body)
+         print "-----------------------------------------------\n\n"
       end
       
      local xmlhandler = simpleTreeHandler()
@@ -417,7 +421,7 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
 
   local url = msgTable.address
             --(url, callback, method, params, userAgent, headers, user, password, port)
-  http.request(url, getHttpResponse, "POST", xml, userAgent,   
+  ncluahttp.request(url, getHttpResponse, "POST", xml, userAgent,   
                httpContentType, httpUser, httpPasswd, port)
 end
 

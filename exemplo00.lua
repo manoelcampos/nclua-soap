@@ -5,38 +5,38 @@
 --Adiciona o diretório lib ao path de bibliotecas, para que a aplicação encontre
 --os módulos disponibilizados
 package.path = package.path .. ';lib/?.lua'
-
-require "ncluasoap"
-
----Função para processar a resposta da requisição SOAP enviada ao WS
---@param result Resultado da chamada ao método remoto via SOAP.
---No caso deste Web Service, o resultado é uma variável primitiva simples (ou seja, contendo apenas um valor)
-local function getResponse(result)
-  --Forma de uso com NCLua SOAP anterior a 0.5.6
-  --print("\n\n---------Cotação do Dolar em Reais:", result.ConversionRateResult, "\n\n")
-
-  print("\n\n\n--------------------------------RESULTADO--------------------------------")
-  print("         Cotação do Dolar em Reais:", result)
-  print("--------------------------------RESULTADO--------------------------------\n\n\n")
-
-
-  --Finaliza o script lua. Um link no NCL finalizará a aplicação NCL quando o nó lua for finalizado
-  event.post {class="ncl", type="presentation", action="stop"}
-end
- 
---Cria uma table contendo os dados para envio da requisição SOAP ao WS
-local msgTable = {
-  address = "http://www.webservicex.net/CurrencyConvertor.asmx",
-  --Namespace exatamente como especificado no WSDL, neste caso, terminando com /
-  namespace = "http://www.webserviceX.NET/",
-  operationName = "ConversionRate",
-  params = {
-    FromCurrency = "USD", --Dólar
-    ToCurrency = "BRL" --Real
-  }
-}
  
 local function main()
+  require "ncluasoap"
+  
+  ---Função para processar a resposta da requisição SOAP enviada ao WS
+  --@param result Resultado da chamada ao método remoto via SOAP.
+  --No caso deste Web Service, o resultado é uma variável primitiva simples (ou seja, contendo apenas um valor)
+  local function getResponse(result)
+    --Forma de uso com NCLua SOAP anterior a 0.5.6
+    --print("\n\n---------Cotação do Dolar em Reais:", result.ConversionRateResult, "\n\n")
+  
+    print("\n\n\n--------------------------------RESULTADO--------------------------------")
+    print("         Cotação do Dolar em Reais:", result)
+    print("--------------------------------RESULTADO--------------------------------\n\n\n")
+  
+  
+    --Finaliza o script lua. Um link no NCL finalizará a aplicação NCL quando o nó lua for finalizado
+    event.post {class="ncl", type="presentation", action="stop"}
+  end
+   
+  --Cria uma table contendo os dados para envio da requisição SOAP ao WS
+  local msgTable = {
+    address = "http://www.webservicex.net/CurrencyConvertor.asmx",
+    --Namespace exatamente como especificado no WSDL, neste caso, terminando com /
+    namespace = "http://www.webserviceX.NET/",
+    operationName = "ConversionRate",
+    params = {
+      FromCurrency = "USD", --Dólar
+      ToCurrency = "BRL" --Real
+    }
+  }
+
   ncluasoap.debug = true
   
   --Executa o método remoto, definido dentro da msgTable,
