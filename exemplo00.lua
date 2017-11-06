@@ -37,6 +37,8 @@ local msgTable = {
 }
  
 local function main()
+  ncluasoap.debug = true
+  
   --Executa o método remoto, definido dentro da msgTable,
   --gerando uma requisição SOAP, enviando ao WS e obtendo o resultado.
   --getResponse é uma função de callback que será executada

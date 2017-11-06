@@ -4,10 +4,10 @@
 --que foi adaptado para Lua 5.x e adicionado parâmetro parseAttributes
 --ao método xmlParser.parse para indicar se os atributos das tags
 --devem ser processados ou não. <p/>
+--
 --@license <a href="http://creativecommons.org/licenses/by-nc-sa/2.5/br/">http://creativecommons.org/licenses/by-nc-sa/2.5/br/</a>
 --@author Manoel Campos da Silva Filho
 --<a href="http://manoelcampos.com">http://manoelcampos.com</a> 
---@author Paulo Roberto de Lira Gondim
 --@class module
 
 --http://www.xml.com/pub/a/2000/11/29/schemas/part1.html?page=8
@@ -27,14 +27,21 @@ local _G, http, print, string, table, pairs,
 
 module "ncluasoap"
 
+---Se true, mostra no terminal o conteúdo do envelope SOAP embutido na requisição HTTP
+-- e a resposta HTTP.
+debug = false
+
 local userAgent = "ncluasoap/0.6"
 
 ---Obtém um elemento _attr em uma tabela lua,
---que representa os atributos de uma tag xml,
+--que representa os atributos de uma tag XML,
 --e gera a string correspondente à lista
 --de tais atributos para ser inserida
---dentro da tag de abertura de um xml
+--dentro da tag de abertura de um XML
 --sendo gerado a partir de uma tabela lua.
+--
+--@param attrTable table de onde o elemento _attr será obtido,
+--que representa a lista de atributos de uma tag XML
 function attrToXml(attrTable)
   local s = ""
   for k, v in pairs(attrTable) do
@@ -43,43 +50,52 @@ function attrToXml(attrTable)
   return s
 end
 
----Converte uma tabela lua para uma string que representa um trecho de código XML
+---Converte uma tabela lua para uma string que representa um trecho de código XML.
+--
 --@param tb Tabela a ser convertida
 --@param level Apenas usado internamente, quando a função
 --é chamada recursivamente, para imprimir espaços e 
 --representar os níveis dentro da tabela.
+--
 --@param elevateAnonymousSubTables Se igual a true, quando encontrada uma sub-tabela sem nome dentro da tabela
 --(tendo sido definida apenas como {chave1 = valor1, chave2 = valor2, chaveN = valorN}
 --ao invés de nomeSubTabela = {chave1 = valor1, chave2 = valor2, chaveN = valorN})
 --os elementos da sub-tabela serão consideradas como se estivessem diretamento dentro da tabela 
 --a qual a sub-tabela pertence, e não que estejam dentro da sub-tabela. 
+--
 --Tais sub-tabelas não tem um nome para a chave, e sim um índice definido
 --automaticamente pelo compilador Lua. O parâmetro é opcional e seu valor default é false.
 --O uso do valor true é útil quando tem-se sub-tabelas contendo apenas um campo,
 --onde colocou-se tal campo dentro da sub-tabela sem nome, apenas para que, ao ser processada a tabela
 --principal, os campos sejam acessados na ordem em que foram definidos, e não em ordem
 --arbitrária definida pela função pairs (usada internamente nesta função).
+--
 --A ordem do processamento dos campos de uma tabela é importante no caso do
 --processamento da tabela de parâmetros a serem passados a um WebService,
 --pois WSs PHP feitos como a biblioteca NuSOAP, não 
 --verificam o nome dos parâmetros, e sim a ordem em que são passados.
+--
 --Assim, o comportamento padrão de acesso aos elementos de uma tabela
 --não garante que os campos serão acessados na mesma ordem em que
 --foram definidos, podendo fazer com que sejam passados os valores
 --trocados para o WS sendo acessado. 
---@return Retorna a string com as tags XML geradas
---a partir dos itens da tabela
+--
 --@param tableName Nome da variável table sendo passada para a função. 
 --Este parâmetro é opcional e seu valor é utilizado apenas quando
 --é passada uma table em formato de um vetor (array) onde 
 --só existem índices, não existindo chaves nomeadas (como ocorre em um registro/struct).
+--
 --Assim, para cada posição no vetor, será gerada uma tag com o nome do mesmo,
 --contendo os dados de cada posição. Isto é utilizado
 --quando o método no Web Service a ser chamado possuir um vetor como parâmetro.
+--
 --Logo, se existir um parâmetro, no método do WS, 
 --de nome vet e do tipo array, a função tableToXml gerará
 --um código XML como <vet>valor1</vet><vet>valor2</vet><vet>valorN</vet>
 --para passar tal vetor (table lua) ao método do Web Service.
+--
+--@return Retorna a string com as tags XML geradas
+--a partir dos itens da tabela
 local function tableToXml(tb, level, elevateAnonymousSubTables, tableName)
   level = level or 1
   local spaces = string.rep(' ', level*2)
@@ -147,6 +163,7 @@ end
 ---Remove qualquer elemento que represente informações
 --de definições de tipo da tabela, pois somente
 --os dados é que interessam.
+--
 --@param xmlTable Table lua gerada a partir de código XML
 --@return Retorna a nova tabela sem as chaves de schema
 local function removeSchema(xmlTable)
@@ -175,7 +192,8 @@ local function removeSchema(xmlTable)
 end
 
 
----Envia uma requisição SOAP para realizar a chamada de um método remoto vai HTTP
+---Envia uma requisição SOAP para realizar a chamada de um método remoto vai HTTP.
+--
 --@param  msgTable Tabela contendo os parâmetros
 --da requisição, devendo ter o seguinte formato:<br/>
 --msgTable = {<br/>
@@ -190,19 +208,23 @@ end
 --&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;paramNameN=valueN<br/>
 --&nbsp;&nbsp;&nbsp;}<br/>
 --&nbsp;}<br/>
+--
 --@param  callback Função de callback a ser executada quando
 --a resposta da requisição for obtida. A mesma deve possuir
 --em sua assinatura, um parâmetro response, que conterá
 --o retorno da chamada da função remota.
+--
 --@param  soapVersion Versão do protocolo SOAP a ser utilizado.
 --Os valores permitidos são 1.1 e 1.2. Se omitido, será usado 1.2
 --Alguns WebServices (como os em ASP.NET, de extensão asmx)
 --suportam diferentes versões do SOAP (como 1.1 e 1.2),
 --mas pode ser que isto não seja verdade para todos os serviços.
 --Assim, precisará ser informado qual a versão do protocolo a ser utilizada. 
+--
 --@param  port Porta a ser utilizada para a conexão. O padrão é 80, no caso do valor ser omitido.
 --A porta também pode ser especificada diretamente na URL (campo address do parâmetro msgTable). 
 --Se for indicada uma porta lá e aqui no parâmetro port, a porta da url é que será utilizada e a do parâmetro port será ignorada.
+--
 --@param boolean externalXsd Indica se o Web Service utiliza um arquivo externo (xsd) para as definições de tipos (XML Schema Definition).
 --O formato da requisição SOAP é dependente disto. A maioria dos Web Services construídos, em diversas linguagens,
 --inclui as definições de tipo diretamente no arquivo WSDL. Os Web Services que usam um xsd externo possuem
@@ -211,10 +233,13 @@ end
 --Web Services feitos com a ferramenta Netbeans, utilizando a biblioteca JAX-WS (pelo menos em alguma
 --de suas versões) faz uso de um xsd externo. Neste caso, este parâmetro externalXsd deve ser true.
 --O valor padrão do parâmetro é false. 
---@param httpUser Nome de usuário para realizar autenticação HTTP, em caso de WS que utilizam tal recurso. Parâmetro Opcional.
---@param httpPasswd Senha para realizar autenticação HTTP, em caso de WS que utilizam tal recurso. Parâmetro Opcional.
+--
+--@param httpUser Nome de usuário para realizar autenticação HTTP, em caso de WS que utilizam tal recurso (Opcional).
+--
+--@param httpPasswd Senha para realizar autenticação HTTP, em caso de WS que utilizam tal recurso (Opcional).
+--
 --@param soapHeader String contendo cabeçalho SOAP a serem enviado na requisição.
---Tal cabeçalho é uma tag contendo valores a serem passados ao Web Service. Opcional.
+--Tal cabeçalho é uma tag contendo valores a serem passados ao Web Service (Opcional).
 function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, httpPasswd, soapHeader)
   if soapVersion == nil or soapVersion == "" then
      soapVersion = "1.2"
@@ -233,11 +258,9 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
   end
 
   local xmltb = {}
-  --se tem um ponto no nome do metodo, o mesmo eh metodo de uma classe
+  --Se tem um ponto no nome do método, o mesmo é método de uma classe
   local isOOMethod = string.find(msgTable.operationName, "%.")
   
-  --SOAP 1.2 message
-  --table.insert(xmltb, '')
   table.insert(xmltb, '<?xml version="1.0"?>')
   table.insert(xmltb, '<'..nsPrefix..':Envelope ')
   table.insert(xmltb, ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ')
@@ -254,11 +277,10 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
        ' xmlns:'..nsPrefix..'="http://www.w3.org/2003/05/soap-envelope" ')
   end
   local serviceNsPrefix = ""
-  --Se o XSD eh um arquivo externo ou os metodos publicados no WS
-  --sao metodos de uma classe 
-  --(devido o nome da operacao estar no formato Classe.NomeMetodo)
-  --eh preciso incluir o namespace do WS na lista de namespaces 
-  --na requisicao
+  --Se o XSD é um arquivo externo ou os métodos publicados no WS
+  --são métodos de uma classe 
+  --(devido o nome da operação estar no formato Classe.NomeMetodo)
+  --é preciso incluir o namespace do WS na lista de namespaces na requisição
   if externalXsd or isOOMethod then
      serviceNsPrefix = "ns1"
      table.insert(xmltb, ' xmlns:'..serviceNsPrefix..'="'..msgTable.namespace..'" ')     
@@ -312,8 +334,12 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
   table.insert(xmltb, '</'..nsPrefix..':Envelope>')
   
   local xml = table.concat(xmltb, '\n')
-  --print(xml)
-  
+  if debug then
+    print "\n\nSOAP XML Request"
+    print(xml)
+    print "\n\n"
+  end
+ 
   local httpContentType = ''
   if soapVersion == "1.1" then
 		 local soapAction, separator = "", ""
@@ -331,7 +357,13 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
   end
   
   local function getHttpResponse(header, body)
-     --print("\n",body)
+      if debug then
+         print("\n\nHTTP Response")
+         print("Header: ", header)
+         print("Body: ", body)
+         print "\n\n"
+      end
+      
      local xmlhandler = simpleTreeHandler()
      local xmlparser = xmlParser(xmlhandler)
      xmlparser:parse(body, false)
@@ -354,12 +386,9 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
              end
           end
         end
-        --print("\n\nResponse nsPrefix = "..nsPrefix.."\n\n")
-    
     
         local envelope = nsPrefix.."Envelope"
         local bodytag = nsPrefix.."Body"
-        --local operationResp = msgTable.operationName.."Response"
         xmlTable = xmlhandler.root[envelope][bodytag]
 
         --Dentro da tag body haverá uma outra tag
@@ -372,8 +401,7 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
         --que contém os dados da resposta da requisição (seja o retorno
         --do método a tag Fault contendo detalhes do erro)
             
-        --O uso da função next não funciona para pegar o primeiro elemento. Trava aqui 
-        --_, xmlTable = next(xmlTable)
+        --A função next não funciona para pegar o 1º elemento. Trava aqui: _, xmlTable = next(xmlTable)
         for k, v in pairs(xmlTable) do
           xmlTable = v
           break
@@ -393,18 +421,16 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
                httpContentType, httpUser, httpPasswd, port)
 end
 
----Grava uma tabela em um arquivo xml no disco
+---Grava uma tabela em um arquivo xml no disco.
+--
 --@param tb Tabela a partir da qual será gerado o xml
 --@param fileName Nome do arquivo xml a ser criado
 --@param encoding Codificação de caracteres a ser definida
---no cabeçalho do xml (opcional, valor padrão ISO-8859-1)
+--       no cabeçalho do xml (opcional, valor padrão ISO-8859-1)
 function writeToXml(tb, fileName, encoding)
- local encoding = encoding or "ISO-8859-1"
- local xmlText = tableToXml(tb, 1, false, getFirstKey(tb))
- xmlText = '<?xml version="1.0" encoding="'.. encoding ..'"?>\n' .. xmlText
- createFile(xmlText, fileName)
- return xmlText
+    local encoding = encoding or "ISO-8859-1"
+    local xmlText = tableToXml(tb, 1, false, getFirstKey(tb))
+    xmlText = '<?xml version="1.0" encoding="'.. encoding ..'"?>\n' .. xmlText
+    createFile(xmlText, fileName)
+    return xmlText
 end
-
-
-
