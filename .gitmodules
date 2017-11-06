@@ -1,6 +1,6 @@
+[submodule "lib/xml2lua"]
+	path = lib/xml2lua
+	url = https://github.com/manoelcampos/xml2lua
 [submodule "lib/ncluahttp"]
 	path = lib/ncluahttp
-        url = https://github.com/manoelcampos/NCLuaHTTP.git 
-[submodule "lib/luaxml"]
-	path = lib/luaxml
-        url = https://github.com/manoelcampos/xml2lua.git
+	url = https://github.com/manoelcampos/NCLuaHTTP

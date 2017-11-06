@@ -33,7 +33,7 @@ A documentação da biblioteca foi gerada com LuaDoc e está [disponível para c
 # Baixando o Projeto
 
 Para utilizar o projeto é preciso baixar os fontes disponíveis aqui.
-O NCLua SOAP utiliza a biblioteca [LuaXML](https://github.com/manoelcampos/LuaXML) (adaptada para Lua 5) e o módulo [NCLua HTTP](https://github.com/manoelcampos/NCLuaHTTP) que já estão incluídos como dependências. No entanto, se você baixar o zip, os fontes de tais módulos adicionais **não** são baixados e o NCLua SOAP **não** irá funcionar.
+O NCLua SOAP utiliza a biblioteca [Xml2Lua](https://github.com/manoelcampos/xml2lua) e o módulo [NCLua HTTP](https://github.com/manoelcampos/NCLuaHTTP) que já estão incluídos como dependências. No entanto, se você baixar o zip, os fontes de tais módulos adicionais **não** são baixados e o NCLua SOAP **não** irá funcionar.
 
 Para baixar todos os fontes necessários (incluindo as versões corretas dos módulos citados), execute o comando abaixo no terminal (pode até mesmo ser diretamente dentro da máquina virtual Ginga):
 

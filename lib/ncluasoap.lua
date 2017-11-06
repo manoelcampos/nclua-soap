@@ -14,18 +14,24 @@
 --http://www.developerfusion.com/article/3720/understanding-xml-namespaces/5/
 --http://www.quackit.com/xml/tutorial/xml_default_namespace.cfm
 
-package.path = package.path .. ';lib/?/?.lua;lib/ncluahttp/tcp.lua'
+--O submódulo xmlhandler.tree está dentro da pasta do módulo xml2lua,
+--mas não está definido como um submódulo de xml2lua.
+--Por isso, como estamos usando o xml2lua e os submódulos em xmlhandler,
+--é preciso colocar o path lib/xml2lua/?.lua, que permite carregar os submódulos
+--de xmlhandler primeiro, antes dos outros paths.
+--O mesmo ocorre com os módulos util e tcp que estão dentro de ncluahttp mas não são submódulos dele.
+package.path = package.path .. ';lib/?/?.lua;lib/xml2lua/?.lua;lib/ncluahttp/?.lua'
 
 require "ncluahttp"
-require "ncluahttp/util"
-dofile("lib/luaxml/xml.lua")
-dofile("lib/luaxml/handler.lua")
+require "ncluahttp.util"
+require "xml2lua"
+require "xmlhandler.tree"
 
-local _G, ncluahttp, print, string, table, pairs, 
-      simpleTreeHandler, type, tostring, error
+local _G, print, string, table, pairs, type, tostring, error, require,
+      ncluahttp, util, xml2lua, xmlhandler
       = 
-      _G, ncluahttp, print, string, table, pairs,
-      simpleTreeHandler, type, tostring, error
+      _G, print, string, table, pairs, type, tostring, error, require,
+      ncluahttp, util, xml2lua, xmlhandler
 
 module "ncluasoap"
 
@@ -368,55 +374,56 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
          print "-----------------------------------------------\n\n"
       end
       
-     local xmlhandler = simpleTreeHandler()
-     local xmlparser = xmlParser(xmlhandler)
-     xmlparser:parse(body, false)
-     local xmlTable = {}
+      local xmlhandler = xmlhandler.tree
+      local xmlparser = xml2lua.parser(xmlhandler)
+      xmlparser:parse(body, false)
+      local xmlTable = {}
 
-     if nsPrefix ~= "" then
-        nsPrefix = nsPrefix .. ":"
-     end
-     
-     if xmlhandler and xmlhandler.root then   
-        --Se a resposta não possui o Namespace Prefix correspondente
-        --à versão do SOAP utilizada, testa outros padrões de prefixo.
-        if xmlhandler.root[nsPrefix.."Envelope"] == nil then
-          nsPrefix = ""
-          local prefixes = {"soap:", "SOAP-ENV:", "soapenv:", "S:"}
-          for k, v in pairs(prefixes) do
-             if xmlhandler.root[v.."Envelope"] ~= nil then
-                nsPrefix = v
-                break
-             end
+      if nsPrefix ~= "" then
+          nsPrefix = nsPrefix .. ":"
+      end
+      
+      if xmlhandler and xmlhandler.root then   
+          --Se a resposta não possui o Namespace Prefix correspondente
+          --à versão do SOAP utilizada, testa outros padrões de prefixo.
+          if xmlhandler.root[nsPrefix.."Envelope"] == nil then
+            nsPrefix = ""
+            local prefixes = {"soap:", "SOAP-ENV:", "soapenv:", "S:"}
+            for k, v in pairs(prefixes) do
+              if xmlhandler.root[v.."Envelope"] ~= nil then
+                  nsPrefix = v
+                  break
+              end
+            end
           end
-        end
-    
-        local envelope = nsPrefix.."Envelope"
-        local bodytag = nsPrefix.."Body"
-        xmlTable = xmlhandler.root[envelope][bodytag]
+      
+          local envelope = nsPrefix.."Envelope"
+          local bodytag = nsPrefix.."Body"
+          xmlTable = xmlhandler.root[envelope][bodytag]
 
-        --Dentro da tag body haverá uma outra tag
-        --que conterá todos os valores retornados pela
-        --função remota. O nome padrão desta tag é 
-        --MethodNameResponse (nome do método + Response). 
-        --Caso o WS retorne um erro, existirá uma tag Fault dentro
-        --do body no lugar da resposta esperada.
-        --Assim, o código abaixo pega o valor da primeira chave,
-        --que contém os dados da resposta da requisição (seja o retorno
-        --do método a tag Fault contendo detalhes do erro)
-            
-        --A função next não funciona para pegar o 1º elemento. Trava aqui: _, xmlTable = next(xmlTable)
-        for k, v in pairs(xmlTable) do
-          xmlTable = v
-          break
-        end
-     end
-     
-     xmlTable = removeSchema(xmlTable)     
-     xmlTable = util.simplifyTable(xmlTable)
-     if callback then
-        callback(xmlTable)
-     end
+          --Dentro da tag body haverá uma outra tag
+          --que conterá todos os valores retornados pela
+          --função remota. O nome padrão desta tag é 
+          --MethodNameResponse (nome do método + Response). 
+          --Caso o WS retorne um erro, existirá uma tag Fault dentro
+          --do body no lugar da resposta esperada.
+          --Assim, o código abaixo pega o valor da primeira chave,
+          --que contém os dados da resposta da requisição (seja o retorno
+          --do método a tag Fault contendo detalhes do erro)
+              
+          --A função next não funciona para pegar o 1º elemento. Trava aqui: _, xmlTable = next(xmlTable)
+          for k, v in pairs(xmlTable) do
+            xmlTable = v
+            break
+          end
+      end
+
+      xmlTable = removeSchema(xmlTable)  
+      util.printable(xmlTable)   
+      xmlTable = util.simplifyTable(xmlTable)
+      if callback then
+          callback(xmlTable)
+      end
   end
 
   local url = msgTable.address

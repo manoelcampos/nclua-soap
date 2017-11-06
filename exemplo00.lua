@@ -18,7 +18,7 @@ local function main()
   
     print("\n\n\n--------------------------------RESULTADO--------------------------------")
     print("         Cotação do Dolar em Reais:", result)
-    print("--------------------------------RESULTADO--------------------------------\n\n\n")
+    print("-------------------------------------------------------------------------\n\n\n")
   
   
     --Finaliza o script lua. Um link no NCL finalizará a aplicação NCL quando o nó lua for finalizado
