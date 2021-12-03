@@ -138,8 +138,7 @@ A chamada a ncluasoap.call possui ainda um terceiro parâmetro opcional, que ind
 Tutoriais
 ---------
 
-[Criando um Web Service PHP com NuSoap e acessando-o com NCLua Soap - por Johnny Moreira Gomes (UFJF)](http://www.ufjf.br/lapic/files/2010/05/TutorialNuSoapNCLuaSoap.pdf). Caso o link esteja quebrado, o tutorial pode ser acessado [aqui](artigos-tutoriais/tutorial-nusoap-ncluasoap.pdf).
-
+[Criando um Web Service PHP com NuSoap e acessando-o com NCLua Soap - por Johnny Moreira Gomes (UFJF)](artigos-tutoriais/tutorial-nusoap-ncluasoap.pdf).
 
 # FAQ
 	
