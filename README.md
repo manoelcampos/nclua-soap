@@ -145,10 +145,6 @@ Tutoriais
 1. **Porque ocorre o erro "HTTP 415: Media Unsupported"?** Este erro pode ocorrer devido à versão da requisição SOAP enviada não ser suportada pelo Web Service. Verifique a documentação da função call do módulo NCLua SOAP para saber como especificar a versão do SOAP a ser utilizada pelo módulo. Se não souber qual versão do protocolo SOAP o Web Service reconhece, teste os valores listados na documentação da função call do módulo.	
 2. **Porque ocorre o erro "unprotected error in call to Lua API (tcp.lua:xx: /usr/local/lib/lua/5.1/tcp_event.lua:xx: assertion failed!)"?** Este erro pode ocorrer devido a aplicação, rodando no Ginga Virtual STB, não ter acesso à Internet/LAN. Tal problema era comum na versão anterior a 0.11.2 do Ginga Virtual STB. Verifique a seção de pré-requisitos para mais informações.
 
-# Fórum de Discussão
-
-Para tirar dúvidas, relatar bugs, propor melhorias e quaisquer outros assuntos relacionados a Web Services em aplicações NCLua para TV Digital, acesse o [Fórum NCLua SOAP no Google Groups](http://groups.google.com/group/ncluasoap).
-
 # Aviso
 
 O módulo implementa as versões 1.1 e 1.2 do protocolo SOAP, e está em fase beta, podendo conter bugs e inconsistências com o padrão. Assim, use por sua conta e risco! Dúvidas, críticas, sugestões e, principalmente, relatos de problemas com algum WebService, são bem vindos e devem ser enviados pelo Fórum mostrado acima.
