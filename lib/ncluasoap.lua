@@ -24,14 +24,11 @@ package.path = package.path .. ';lib/?/?.lua;lib/xml2lua/?.lua;lib/ncluahttp/?.l
 
 require "ncluahttp"
 require "ncluahttp.util"
-require "xml2lua"
-require "xmlhandler.tree"
+local xml2lua = require("xml2lua")
 
-local _G, print, string, table, pairs, type, tostring, error, require,
-      ncluahttp, util, xml2lua, xmlhandler
+local _G, print, string, table, pairs, type, tostring, error, require, ncluahttp, util
       = 
-      _G, print, string, table, pairs, type, tostring, error, require,
-      ncluahttp, util, xml2lua, xmlhandler
+      _G, print, string, table, pairs, type, tostring, error, require, ncluahttp, util
 
 module "ncluasoap"
 
@@ -374,7 +371,7 @@ function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, http
          print "-----------------------------------------------\n\n"
       end
       
-      local xmlhandler = xmlhandler.tree
+      local xmlhandler = require("xmlhandler.tree")
       local xmlparser = xml2lua.parser(xmlhandler)
       xmlparser:parse(body, false)
       local xmlTable = {}
