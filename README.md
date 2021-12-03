@@ -47,7 +47,7 @@ Para usar o NCLua SOAP, é preciso adicionar as linhas abaixo ao seu script lua:
 --Adiciona o diretório lib (onde estão os arquivos do NCLua SOAP) ao path de bibliotecas,
 --para que a aplicação encontre os módulos disponibilizados
 package.path = package.path .. ';lib/?.lua'
-require "ncluasoap"
+local ncluasoap = require "ncluasoap"
 ```
 
 A função principal do módulo é a call (ncluasoap.call), que gera e envia um requisição SOAP e obtém o XML de retorno, que é convertido para uma tabela lua (com o módulo LuaXML) para facilitar o acesso aos dados de retorno da chamada do método remoto. O principal parâmetro da função ncluasoap.call é o msgTable, que deve ser uma tabela lua contendo os dados para acesso ao método no Web Service. Na documentação e nos exemplos, é explicado com mais detalhes como isso funciona.Veja a seguir a estrutura que deve ter esse parâmetro:
@@ -91,12 +91,12 @@ Foram disponibilizadas algumas aplicações de exemplo, que consomem Web Service
 ```lua
 ---Exemplo simples, mas completo, de uso do NCLua SOAP
 package.path = package.path .. ';lib/?.lua'
-require "ncluasoap"
+local ncluasoap = require "ncluasoap"
 ---Função para processar a resposta da requisição SOAP enviada ao WS
 --@param result Resposta da chamada do método remoto, neste caso, uma string.
 --Dependendo do método remoto chamado, o result pode ser de um tipo estruturado,
 --como um vetor ou struct
-local function getResponse(resul)
+local function getResponse(result)
   --O nome do elemento que contém o retorno é obtido no WSDL ou no XML de retorno
   print("Cotação do Dolar em Reais:", result)
 end
@@ -118,14 +118,6 @@ local msgTable = {
 --getResponse é uma função de callback que será executada
 --automaticamente, assim que a resposta da chamada remota for obtida.
 ncluasoap.call(msgTable, getResponse)
-
---Esta linha é executada automaticamente após a chamada de ncluasoap.call
---A chamada a ncluasoap.call retorna imediatamente, pois é uma chamada
---assíncrona, devido a particularidades do módulo TCP de NCLua.
---Assim, NÃO é possível obter o retorna do método remoto
---fazendo algo como retorno = ncluasoap.call(msgTable).
---Tal instrução não funciona.
-print("---------------------------Chamou ncluasoap.call")
 ```
 
 Após a chamada da função ncluasoap.call, quando o método remoto retornar um resultado, a função getResponse será automaticamente chamada, recebendo a resposta do método remoto como parâmetro. Observe que dentro da função _getResponse_, o valor retornado pelo WS é obtido por meio do acesso ao parâmetro _result_.

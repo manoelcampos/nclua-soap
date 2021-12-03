@@ -4,7 +4,7 @@
 --os módulos disponibilizados
 package.path = package.path .. ';lib/?.lua'
 
-require "ncluasoap"
+local ncluasoap = require "ncluasoap"
 
 local fahrenheit = 212
 

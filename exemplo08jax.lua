@@ -5,7 +5,7 @@
 --os módulos disponibilizados
 package.path = package.path .. ';lib/?.lua'
 
-require "ncluasoap"
+local ncluasoap = require "ncluasoap"
 
 local function getResponse(result)
   print("\n\n\n--------------------------------RESULTADO--------------------------------")

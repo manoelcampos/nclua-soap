@@ -4,8 +4,8 @@
 --os módulos disponibilizados
 package.path = package.path .. ';lib/?.lua'
 
-require "ncluasoap"
-require "util"
+local ncluasoap = require "ncluasoap"
+local util = require "util"
 --Como o TextField não é um módulo, é preciso usar dofile para incluí-lo
 dofile("lib/TextField.lua")
 

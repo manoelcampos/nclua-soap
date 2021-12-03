@@ -7,7 +7,7 @@
 --os módulos disponibilizados
 package.path = package.path .. ';lib/?.lua'
 
-require "ncluasoap"
+local ncluasoap = require "ncluasoap"
 
 ---Finaliza o script lua. Um link no NCL finalizará a aplicação NCL quando o nó lua for finalizado
 local function stopPresentation()

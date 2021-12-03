@@ -7,7 +7,7 @@
 package.path = package.path .. ';lib/?.lua'
  
 local function main()
-  require "ncluasoap"
+  local ncluasoap = require "ncluasoap"
   
   ---Função para processar a resposta da requisição SOAP enviada ao WS
   --@param result Resultado da chamada ao método remoto via SOAP.
