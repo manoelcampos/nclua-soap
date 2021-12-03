@@ -22,19 +22,15 @@
 --O mesmo ocorre com os módulos util e tcp que estão dentro de ncluahttp mas não são submódulos dele.
 package.path = package.path .. ';lib/?/?.lua;lib/xml2lua/?.lua;lib/ncluahttp/?.lua'
 
-require "ncluahttp"
-require "ncluahttp.util"
+local ncluahttp = require "ncluahttp"
+local util = require "ncluahttp.util"
 local xml2lua = require("xml2lua")
 
-local _G, print, string, table, pairs, type, tostring, error, require, ncluahttp, util
-      = 
-      _G, print, string, table, pairs, type, tostring, error, require, ncluahttp, util
-
-module "ncluasoap"
-
----Se true, mostra no terminal o conteúdo do envelope SOAP embutido na requisição HTTP
--- e a resposta HTTP.
-debug = false
+local ncluasoap = {
+   ---Se true, mostra no terminal o conteúdo do envelope SOAP embutido na requisição HTTP
+   -- e a resposta HTTP.
+   debug = false
+}
 
 local userAgent = "ncluasoap/0.7"
 
@@ -47,7 +43,7 @@ local userAgent = "ncluasoap/0.7"
 --
 --@param attrTable table de onde o elemento _attr será obtido,
 --que representa a lista de atributos de uma tag XML
-function attrToXml(attrTable)
+function ncluasoap.attrToXml(attrTable)
   local s = ""
   for k, v in pairs(attrTable) do
       s = s .. " " .. k .. "=" .. '"' .. v .. '"'
@@ -245,7 +241,7 @@ end
 --
 --@param soapHeader String contendo cabeçalho SOAP a serem enviado na requisição.
 --Tal cabeçalho é uma tag contendo valores a serem passados ao Web Service (Opcional).
-function call(msgTable, callback, soapVersion, port, externalXsd, httpUser, httpPasswd, soapHeader)
+function ncluasoap.call(msgTable, callback, soapVersion, port, externalXsd, httpUser, httpPasswd, soapHeader)
   if soapVersion == nil or soapVersion == "" then
      soapVersion = "1.2"
   end
@@ -435,10 +431,12 @@ end
 --@param fileName Nome do arquivo xml a ser criado
 --@param encoding Codificação de caracteres a ser definida
 --       no cabeçalho do xml (opcional, valor padrão ISO-8859-1)
-function writeToXml(tb, fileName, encoding)
+function ncluasoap.writeToXml(tb, fileName, encoding)
     local encoding = encoding or "ISO-8859-1"
     local xmlText = tableToXml(tb, 1, false, getFirstKey(tb))
     xmlText = '<?xml version="1.0" encoding="'.. encoding ..'"?>\n' .. xmlText
     createFile(xmlText, fileName)
     return xmlText
 end
+
+return ncluasoap
