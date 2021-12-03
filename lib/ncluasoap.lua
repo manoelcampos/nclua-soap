@@ -32,7 +32,7 @@ local ncluasoap = {
    debug = false
 }
 
-local userAgent = "ncluasoap/0.7"
+local userAgent = "ncluasoap/1.0.0"
 
 ---Obtém um elemento _attr em uma tabela lua,
 --que representa os atributos de uma tag XML,
