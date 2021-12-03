@@ -28,16 +28,16 @@ O Artigo NCLua SOAP: Acesso à Web Services em Aplicações de TVDi foi publicad
 
 # Documentação
 
-A documentação da biblioteca foi gerada com LuaDoc e está [disponível para consulta online aqui](http://manoelcampos.github.io/NCLuaSOAP/doc/).
+A documentação da biblioteca pode ser gerada com LuaDoc.
 
 # Baixando o Projeto
 
 Para utilizar o projeto é preciso baixar os fontes disponíveis aqui.
-O NCLua SOAP utiliza a biblioteca [Xml2Lua](https://github.com/manoelcampos/xml2lua) e o módulo [NCLua HTTP](https://github.com/manoelcampos/NCLuaHTTP) que já estão incluídos como dependências. No entanto, se você baixar o zip, os fontes de tais módulos adicionais **não** são baixados e o NCLua SOAP **não** irá funcionar.
+O NCLua SOAP utiliza a biblioteca [Xml2Lua](https://github.com/manoelcampos/xml2lua) e o módulo [NCLua HTTP](https://github.com/manoelcampos/nclua-http) que já estão incluídos como dependências. No entanto, se você baixar o zip, os fontes de tais módulos adicionais **não** são baixados e o NCLua SOAP **não** irá funcionar.
 
 Para baixar todos os fontes necessários (incluindo as versões corretas dos módulos citados), execute o comando abaixo no terminal (pode até mesmo ser diretamente dentro da máquina virtual Ginga):
 
-`git clone --recursive https://github.com/manoelcampos/NCLuaSOAP.git`
+`git clone --recursive https://github.com/manoelcampos/nclua-soap.git`
 
 # Utilizando o NCLua SOAP
 
